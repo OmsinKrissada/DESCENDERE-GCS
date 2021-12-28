@@ -16,6 +16,7 @@ These will be our major tasks:
 - ```CX```: Container Telemetry On/Off Command
 	- send ```CXON``` to the container prior to launch
 - ```ST```: Set Time
+	- prefer system time than manually typing in
 - ```SIM```: Simulation Mode Control Command
 - ```SIMP```: Simulated Pressure Data (used in Simulation Mode only)
 	- must be able to read pressure data profile file
@@ -26,5 +27,7 @@ These will be our major tasks:
 - The file should be ready immediately after the launch via USB drive.
 
 ### Display and plot each data field in real time
+- Must include mission time
+- Must show sent and received packets count
 
 ### Send real time data to MQTT broker
