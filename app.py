@@ -191,12 +191,14 @@ class App(QMainWindow):
         # Determine package origin
         if pkg[3] == 'C':
             # logger.info(f'[CANSAT] :{data}')
-            with open('Flight_1022_C.csv', 'a') as f:
+            with open('Flight_1022_C_with_corrupted.csv', 'a') as f:
                 f.write(data+'\n')
             self.latest_container_telemetry = pkg[:]
             self.updateContainer()
         elif pkg[3] == 'P':
             # logger.info(f'[PAYLOAD]: {data}')
+            with open('Flight_1022_P_with_corrupted.csv', 'a') as f:
+                f.write(data+'\n')
             self.latest_payload_telemetry = pkg[:]
             self.updatePayload()
 
@@ -246,6 +248,9 @@ class App(QMainWindow):
             self.container_healthy_pkg += 1
             self.ui.c_healthy_pkg_count.setText(
                 str(self.container_healthy_pkg))
+            with open('Flight_1022_C.csv', 'a') as file:
+                file.write(','.join(self.latest_container_telemetry)+'\n')
+
         except Exception:
             self.container_corrupted_pkg += 1
             self.ui.c_corrupted_pkg_count.setText(
@@ -295,6 +300,8 @@ class App(QMainWindow):
             self.payload_healthy_pkg += 1
             self.ui.p_healthy_pkg_count.setText(
                 str(self.payload_healthy_pkg))
+            with open('Flight_1022_P.csv', 'a') as file:
+                file.write(','.join(self.latest_payload_telemetry)+'\n')
         except Exception:
             self.payload_corrupted_pkg += 1
             self.ui.p_corrupted_pkg_count.setText(

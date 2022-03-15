@@ -7,7 +7,7 @@ class TelemetryHandler:
     terminating_char = '\r'
 
     def __init__(self, port_name: str) -> None:
-        self.port = Port(port_name, self.terminating_char,baudrate=115200)
+        self.port = Port(port_name, self.terminating_char, baudrate=115200)
         self.port.connect()
 
     def read(self):
