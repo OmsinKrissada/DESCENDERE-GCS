@@ -22,6 +22,7 @@ import time
 import pyqtgraph as pg
 import csv
 import simplekml
+import paho.mqtt.client as mqtt
 
 
 class App(QMainWindow):
@@ -39,6 +40,15 @@ class App(QMainWindow):
         self.ui.gps_map.setHtml(
             '<h1 style="height: 100%; text-align: center; font-family: Inter; background-color: #1c1c28; color: white;">No Data Available</h1>')
         self.map_initialized = False
+
+        # Initilize MQTT
+        self.mqtt_client = mqtt.Client()
+        self.mqtt_client.on_connect = lambda client, userdata, flags, rc: print(
+            "Connected to MQTT broker with result code "+str(rc))
+        self.mqtt_client.on_message = lambda client, userdata, msg: print(
+            msg.topic+" "+str(msg.payload))
+        self.mqtt_client.username_pw_set('1022', 'Teasgote783')
+        self.mqtt_client.connect("cansat.info", 1883)
 
         # Initialize charts
         graphs = [
@@ -189,6 +199,7 @@ class App(QMainWindow):
             logger.error('Received data is None')
             return
         pkg = data.split(',')
+        self.mqtt_client.publish('teams/1022', data)
 
         # Determine package origin
         if pkg[3] == 'C':

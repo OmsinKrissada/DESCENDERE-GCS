@@ -9,6 +9,7 @@ idna==3.3
 Jinja2==3.0.3
 MarkupSafe==2.1.0
 numpy==1.22.2
+paho-mqtt==1.6.1
 pycodestyle==2.8.0
 PyQt5==5.15.6
 PyQt5-Qt5==5.15.2
