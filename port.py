@@ -81,10 +81,13 @@ class Port:
                     logger.debug(
                         'Received None while trying to read from port')
                     return
-            except (SerialException, UnicodeDecodeError) as e:
+            except SerialException as e:
                 logger.error(
                     f'Error reading/decoding character from serial: {e}')
                 raise DisconnectException
+            except UnicodeDecodeError as e:
+                logger.warn(
+                    f'Error reading/decoding character from serial: {e}')
             # logger.debug('Append while loop: ' +
             #              current_char)
             if self.begin_char is not None and current_char == self.begin_char:
