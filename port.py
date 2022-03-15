@@ -81,7 +81,7 @@ class Port:
                     logger.debug(
                         'Received None while trying to read from port')
                     return
-            except SerialException as e:
+            except (SerialException, UnicodeDecodeError) as e:
                 logger.error(
                     f'Error reading/decoding character from serial: {e}')
                 raise DisconnectException
