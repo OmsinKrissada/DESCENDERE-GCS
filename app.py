@@ -48,7 +48,11 @@ class App(QMainWindow):
         self.mqtt_client.on_message = lambda client, userdata, msg: print(
             msg.topic+" "+str(msg.payload))
         self.mqtt_client.username_pw_set('1022', 'Teasgote783')
-        self.mqtt_client.connect("cansat.info", 1883)
+        try:
+            self.mqtt_client.connect("cansat.info", 1883)
+        except Exception:
+            logger.warn('Cannot connect to MQTT broker')
+            self.ui.telemetry_log.append('❌ Cannot connect to MQTT broker')
 
         # Initialize charts
         graphs = [
