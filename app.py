@@ -179,6 +179,8 @@ class App(QMainWindow):
 
     def handleTelemetry(self, data: str):
         # Display in log widget
+        if(not self.ui.telemetry_log or self.ui.telemetry_log == '\r' or self.ui.telemetry_log == '\r\r' or self.ui.telemetry_log == '\r\r\r' or self.ui.telemetry_log == '\n' or self.ui.telemetry_log is None):
+            return
         self.ui.telemetry_log.append(f'📩 {data}')
         if self.ui.autoscroll_check.isChecked():
             scrollbar = self.ui.telemetry_log.verticalScrollBar()
@@ -366,7 +368,7 @@ class App(QMainWindow):
         plottingThread.start()
 
     def batteryPercentage(self, voltage: float):
-        return (voltage/8.4)*100
+        return ((voltage-5.2)/3.2)*100
 
     def startSim(self):
         if hasattr(self, 'sim_thread'):

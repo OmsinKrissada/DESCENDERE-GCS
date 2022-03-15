@@ -88,6 +88,7 @@ class Port:
             except UnicodeDecodeError as e:
                 logger.warn(
                     f'Error reading/decoding character from serial: {e}')
+                return
             # logger.debug('Append while loop: ' +
             #              current_char)
             if self.begin_char is not None and current_char == self.begin_char:
