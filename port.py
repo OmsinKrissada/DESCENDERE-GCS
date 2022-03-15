@@ -2,6 +2,8 @@ import glob
 import serial
 import string
 import sys
+
+from serial.serialutil import SerialException
 from logger import logger
 
 
@@ -13,6 +15,8 @@ class Port:
         self.key = key
         self.begin_char = begin_char
         self.device = None
+        self.connected = False
+        logger.debug('port init called')
 
     @staticmethod
     def list():
@@ -34,7 +38,7 @@ class Port:
 
                 result.append(port)
             except serial.SerialException:
-                pass
+                pass    # legit 'except pass' here
             except Exception as e:
                 logger.error(
                     f'An error occured during port check ({port}): {e}')
@@ -51,18 +55,25 @@ class Port:
             logger.error(f"Cannot write to {self.device}: {e}")
 
     def connect(self):
-        print('port connect called')
+        if self.connected:
+            logger.warning(
+                f'Port {self.port_name} is already connected from port.py perspective.')
+            return
+        self.connected = True
+        logger.debug('port connect called')
         try:
             self.device = serial.Serial(
                 self.port_name, baudrate=self.baudrate, timeout=60)
             logger.info(f'Connected to port {self.device}')
-        except:
-            logger.error(f"Cannot connect to port {self.device}")
+        except Exception as e:
+            logger.error(f"Cannot connect to port {self.device}: {e}")
 
     def read(self):
         combined = ''
         current_char = None
         while current_char != self.terminate_char:
+            if self.device is None:
+                raise DisconnectException
             try:
                 # logger.debug('Trying to read from port')
                 current_char = self.device.read().decode('utf-8')
@@ -70,10 +81,10 @@ class Port:
                     logger.debug(
                         'Received None while trying to read from port')
                     return
-            except Exception as e:
-                logger.warning(
+            except SerialException as e:
+                logger.error(
                     f'Error reading/decoding character from serial: {e}')
-                return
+                raise DisconnectException
             # logger.debug('Append while loop: ' +
             #              current_char)
             if self.begin_char is not None and current_char == self.begin_char:
@@ -108,8 +119,12 @@ class Port:
     def destroy(self):
         try:
             self.device.close()
-        except Exception:
-            logger.error(f'Unable to close serial port {self.port_name}')
+        except Exception as e:
+            logger.error(f'Unable to close serial port {self.port_name}: {e}')
+
+
+class DisconnectException(Exception):
+    pass
 
 
 if __name__ == "__main__":

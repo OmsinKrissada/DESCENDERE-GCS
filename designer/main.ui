@@ -10,6 +10,12 @@
     <height>1080</height>
    </rect>
   </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>16777215</height>
+   </size>
+  </property>
   <property name="font">
    <font>
     <family>Inter</family>
@@ -28,7 +34,7 @@
    <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout">
+   <layout class="QGridLayout" name="gridLayout_3">
     <item row="0" column="0">
      <widget class="QWidget" name="widget_2" native="true">
       <property name="styleSheet">
@@ -37,6 +43,12 @@ background-color: #1c1c28;
 border-radius: 20px;</string>
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_9">
+       <property name="leftMargin">
+        <number>18</number>
+       </property>
+       <property name="rightMargin">
+        <number>18</number>
+       </property>
        <item>
         <widget class="QLabel" name="label">
          <property name="text">
@@ -53,7 +65,7 @@ border-radius: 20px;</string>
           </font>
          </property>
          <property name="text">
-          <string>DESCENDERE</string>
+          <string>DESCENDERE #1022</string>
          </property>
         </widget>
        </item>
@@ -78,13 +90,149 @@ border-radius: 20px;</string>
 background-color: rgb(40, 41, 61);
 border-radius: 20px;</string>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_7">
-       <item>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <property name="leftMargin">
+        <number>18</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>18</number>
+       </property>
+       <property name="bottomMargin">
+        <number>18</number>
+       </property>
+       <item row="2" column="1">
+        <widget class="QComboBox" name="port_value">
+         <property name="font">
+          <font>
+           <family>Consolas</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">padding: 5px;
+background-color: rgba(231, 231, 231, 20);
+border-radius: 5px;</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLabel" name="sim_file_display">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="font">
+          <font>
+           <family>Inter</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">padding: 5px;
+background-color: rgba(231, 231, 231, 20);
+border-radius: 5px;</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_10">
+         <property name="font">
+          <font>
+           <family>Inter</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>XBEE Port:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_11">
+         <property name="font">
+          <font>
+           <family>Inter</family>
+           <pointsize>12</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>Simulation File:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QPushButton" name="sim_file_button">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>110</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Inter</family>
+           <pointsize>9</pointsize>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">padding: 6px;
+background-color: #434350;
+border-radius: 5px;</string>
+         </property>
+         <property name="text">
+          <string>CHOOSE FILE</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QPushButton" name="port_refresh_button">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>110</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <family>Inter</family>
+           <pointsize>9</pointsize>
+           <weight>50</weight>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">padding: 6px;
+background-color: #434350;
+border-radius: 5px;</string>
+         </property>
+         <property name="text">
+          <string>REFRESH</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" colspan="3">
         <widget class="QLabel" name="mission_time">
          <property name="font">
           <font>
            <family>Cascadia Code</family>
-           <pointsize>20</pointsize>
+           <pointsize>18</pointsize>
            <weight>75</weight>
            <bold>true</bold>
           </font>
@@ -98,48 +246,6 @@ border-radius: 20px;</string>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
          </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="port_group">
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
-          <item>
-           <widget class="QLabel" name="label_10">
-            <property name="font">
-             <font>
-              <family>Inter</family>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>XBEE Port:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QComboBox" name="port_value">
-            <property name="font">
-             <font>
-              <family>Consolas</family>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="port_refresh_button">
-            <property name="font">
-             <font>
-              <family>Inter</family>
-              <pointsize>10</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>REFRESH</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
         </widget>
        </item>
       </layout>
@@ -381,7 +487,7 @@ border-radius: 100px;</string>
       </property>
       <property name="minimumSize">
        <size>
-        <width>1101</width>
+        <width>1097</width>
         <height>361</height>
        </size>
       </property>
@@ -467,19 +573,42 @@ border-radius: 100px;</string>
           </item>
           <item>
            <widget class="QGroupBox" name="battery_box">
-            <property name="maximumSize">
-             <size>
-              <width>135</width>
-              <height>69</height>
-             </size>
-            </property>
             <property name="flat">
              <bool>false</bool>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_6">
-             <property name="spacing">
-              <number>0</number>
-             </property>
+             <item>
+              <widget class="QLabel" name="label_14">
+               <property name="maximumSize">
+                <size>
+                 <width>61</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Inter</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>STATE:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="c_state">
+               <property name="font">
+                <font>
+                 <family>Consolas</family>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>-</string>
+               </property>
+              </widget>
+             </item>
              <item>
               <widget class="QLabel" name="container_battery_percent">
                <property name="font">
@@ -490,6 +619,9 @@ border-radius: 100px;</string>
                </property>
                <property name="text">
                 <string>N/A</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                </property>
               </widget>
              </item>
@@ -512,7 +644,7 @@ border-radius: 100px;</string>
                  <number>0</number>
                 </property>
                 <item>
-                 <widget class="QProgressBar" name="battery_visual">
+                 <widget class="QProgressBar" name="c_battery_visual">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                     <horstretch>0</horstretch>
@@ -749,7 +881,7 @@ background-color: white;</string>
       </property>
       <property name="minimumSize">
        <size>
-        <width>1101</width>
+        <width>1097</width>
         <height>361</height>
        </size>
       </property>
@@ -835,19 +967,138 @@ border-radius: 100px;</string>
           </item>
           <item>
            <widget class="QGroupBox" name="battery_box_3">
-            <property name="maximumSize">
-             <size>
-              <width>135</width>
-              <height>69</height>
-             </size>
-            </property>
             <property name="flat">
              <bool>false</bool>
             </property>
             <layout class="QHBoxLayout" name="horizontalLayout_15">
-             <property name="spacing">
-              <number>0</number>
-             </property>
+             <item>
+              <widget class="QLabel" name="label_17">
+               <property name="maximumSize">
+                <size>
+                 <width>61</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Inter</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>STATE:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="p_state">
+               <property name="font">
+                <font>
+                 <family>Consolas</family>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>-</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="widget_6" native="true">
+               <property name="maximumSize">
+                <size>
+                 <width>17</width>
+                 <height>5</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: red;</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_13">
+               <property name="maximumSize">
+                <size>
+                 <width>50</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Inter</family>
+                 <pointsize>9</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Roll</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="widget_7" native="true">
+               <property name="maximumSize">
+                <size>
+                 <width>17</width>
+                 <height>5</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: rgb(0, 170, 0);</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_12">
+               <property name="maximumSize">
+                <size>
+                 <width>50</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Inter</family>
+                 <pointsize>9</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Pitch</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QWidget" name="widget_3" native="true">
+               <property name="maximumSize">
+                <size>
+                 <width>17</width>
+                 <height>5</height>
+                </size>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">background-color: cyan;</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_9">
+               <property name="maximumSize">
+                <size>
+                 <width>50</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Inter</family>
+                 <pointsize>9</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Yaw</string>
+               </property>
+              </widget>
+             </item>
              <item>
               <widget class="QLabel" name="payload_battery_percent">
                <property name="font">
@@ -858,6 +1109,9 @@ border-radius: 100px;</string>
                </property>
                <property name="text">
                 <string>N/A</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                </property>
               </widget>
              </item>
@@ -880,7 +1134,7 @@ border-radius: 100px;</string>
                  <number>0</number>
                 </property>
                 <item>
-                 <widget class="QProgressBar" name="battery_visual_2">
+                 <widget class="QProgressBar" name="p_battery_visual">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                     <horstretch>0</horstretch>
@@ -1156,6 +1410,9 @@ background-color: white;</string>
     </item>
     <item row="2" column="2">
      <widget class="QWidget" name="telemetry_box" native="true">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -1254,17 +1511,61 @@ border-radius: 100px;</string>
                 <string notr="true">color: #8f90a6;</string>
                </property>
                <property name="text">
-                <string>Total Packet Count:</string>
+                <string> Received:</string>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QLabel" name="total_pkg_value">
+               <property name="minimumSize">
+                <size>
+                 <width>45</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
                  <family>Consolas</family>
                  <pointsize>12</pointsize>
                 </font>
+               </property>
+               <property name="text">
+                <string>0</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="total_corrupted_pkg_title">
+               <property name="font">
+                <font>
+                 <family>Inter</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: #8f90a6;</string>
+               </property>
+               <property name="text">
+                <string>Corrupted:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="total_corrupted_pkg_value">
+               <property name="minimumSize">
+                <size>
+                 <width>45</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Consolas</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: #ff5c5c;</string>
                </property>
                <property name="text">
                 <string>0</string>
@@ -1329,7 +1630,7 @@ border-radius: 5px;
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_8">
+           <layout class="QHBoxLayout" name="telemetry_control_group">
             <property name="leftMargin">
              <number>0</number>
             </property>
@@ -1343,7 +1644,7 @@ border-radius: 5px;
              <number>0</number>
             </property>
             <item>
-             <widget class="QComboBox" name="cmdSelectBox_2">
+             <widget class="QComboBox" name="cmd_select_box">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -1365,9 +1666,9 @@ border-radius: 5px;
                <bool>false</bool>
               </property>
               <property name="styleSheet">
-               <string notr="true">background-color: #3e7bfa;
-padding: 5px;
-color: #f2f2f5;</string>
+               <string notr="true">padding: 5px;
+background-color: rgba(231, 231, 231, 20);
+border-radius: 5px;</string>
               </property>
               <property name="editable">
                <bool>false</bool>
@@ -1398,26 +1699,70 @@ color: #f2f2f5;</string>
               </item>
               <item>
                <property name="text">
-                <string>Pressure</string>
+                <string>SIM Enable</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>SIM Activate</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>SIM Disable</string>
                </property>
               </item>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="cmd_input">
+             <widget class="QSplitter" name="splitter_2">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <widget class="QLabel" name="label_7">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>16</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Inter</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: #8f90a6;</string>
+               </property>
+               <property name="text">
+                <string>Preview:</string>
+               </property>
+               <property name="buddy">
+                <cstring>header_box_2</cstring>
+               </property>
+              </widget>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="cmd_preview">
               <property name="enabled">
-               <bool>true</bool>
+               <bool>false</bool>
               </property>
               <property name="font">
                <font>
+                <family>Consolas</family>
                 <pointsize>12</pointsize>
                </font>
               </property>
               <property name="styleSheet">
-               <string notr="true">background-color: #555770;
-border: 2px solid #444657;
-padding: 3px;
-color: white;</string>
+               <string notr="true">padding: 5px;
+background-color: rgba(231, 231, 231, 20);
+border-radius: 5px;
+color: rgb(200, 200, 200);</string>
+              </property>
+              <property name="text">
+               <string/>
               </property>
              </widget>
             </item>
@@ -1430,9 +1775,6 @@ color: white;</string>
                 <bold>false</bold>
                 <kerning>true</kerning>
                </font>
-              </property>
-              <property name="cursor">
-               <cursorShape>PointingHandCursor</cursorShape>
               </property>
               <property name="styleSheet">
                <string notr="true">QPushButton {
@@ -1467,73 +1809,18 @@ QPushButton:pressed {
            </layout>
           </item>
           <item>
-           <widget class="QSplitter" name="splitter_2">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
+           <widget class="QCheckBox" name="autoscroll_check">
+            <property name="font">
+             <font>
+              <family>Inter</family>
+             </font>
             </property>
-            <widget class="QLabel" name="label_7">
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>16</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Inter</family>
-               <pointsize>10</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color: #8f90a6;</string>
-             </property>
-             <property name="text">
-              <string>Command Preview</string>
-             </property>
-             <property name="buddy">
-              <cstring>header_box_2</cstring>
-             </property>
-            </widget>
-            <widget class="QLineEdit" name="cmdPreview">
-             <property name="enabled">
-              <bool>true</bool>
-             </property>
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Consolas</family>
-               <pointsize>12</pointsize>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-color:#e4e4eb;
-padding: 3px;
-color: black;</string>
-             </property>
-             <property name="text">
-              <string>CMD,1000,CX,ON</string>
-             </property>
-             <property name="frame">
-              <bool>false</bool>
-             </property>
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-             <property name="clearButtonEnabled">
-              <bool>false</bool>
-             </property>
-            </widget>
+            <property name="text">
+             <string>Autoscroll</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
            </widget>
           </item>
           <item>
@@ -1582,7 +1869,7 @@ border-radius: 20px;
           </font>
          </property>
          <property name="text">
-          <string>to p pop, port will appear in the dropdown if already present before the gcs start. Battery % isnt accurate. Map doesn't have a proper track line yet. F11 for fullscreen</string>
+          <string>T + HH:MM:SS.ms</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -1590,10 +1877,60 @@ border-radius: 20px;
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="start_button">
-         <property name="text">
-          <string>START</string>
+        <widget class="QGroupBox" name="groupBox_3">
+         <property name="enabled">
+          <bool>true</bool>
          </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>192</width>
+           <height>45</height>
+          </size>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LeftToRight</enum>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="flat">
+          <bool>false</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QPushButton" name="start_button">
+            <property name="maximumSize">
+             <size>
+              <width>80</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Inter</family>
+              <pointsize>9</pointsize>
+             </font>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">padding: 6px;
+background-color: #434350;
+border-radius: 5px;</string>
+            </property>
+            <property name="text">
+             <string>START</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
        <item>
@@ -1708,7 +2045,7 @@ QProgressBar::chunk {
 }</string>
          </property>
          <property name="value">
-          <number>28</number>
+          <number>0</number>
          </property>
          <property name="textVisible">
           <bool>false</bool>
@@ -1748,10 +2085,9 @@ QProgressBar::chunk {
     </property>
     <addaction name="actionForce_parachute_deployment"/>
     <addaction name="separator"/>
-    <addaction name="actionForce_timed_payload_deployment"/>
     <addaction name="actionForce_begin_payload_deployment"/>
-    <addaction name="actionForce_stop_payload_deployment"/>
     <addaction name="separator"/>
+    <addaction name="actionPing_payload"/>
     <addaction name="actionReset_camera_rotation"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
@@ -1761,7 +2097,15 @@ QProgressBar::chunk {
     <addaction name="actionFull_Screen"/>
     <addaction name="actionExit"/>
    </widget>
+   <widget class="QMenu" name="menuMQTT">
+    <property name="title">
+     <string>MQTT</string>
+    </property>
+    <addaction name="actionEnable"/>
+    <addaction name="actionDisable"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuMQTT"/>
    <addaction name="menuTest"/>
    <addaction name="menuWindow"/>
   </widget>
@@ -1772,7 +2116,7 @@ QProgressBar::chunk {
   </action>
   <action name="actionForce_begin_payload_deployment">
    <property name="text">
-    <string>Force begin payload deployment</string>
+    <string>Force begin payload deploy sequence</string>
    </property>
   </action>
   <action name="actionReset_camera_rotation">
@@ -1821,6 +2165,26 @@ QProgressBar::chunk {
     <string>Exit</string>
    </property>
   </action>
+  <action name="actionEnable">
+   <property name="text">
+    <string>Enable</string>
+   </property>
+  </action>
+  <action name="actionDisable">
+   <property name="text">
+    <string>Disable</string>
+   </property>
+  </action>
+  <action name="actionPing_payload">
+   <property name="text">
+    <string>Poll payload</string>
+   </property>
+  </action>
+  <action name="actionStart_break_sequence">
+   <property name="text">
+    <string>Start break sequence</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -1838,5 +2202,22 @@ QProgressBar::chunk {
  <resources>
   <include location="../resources.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmd_preview</sender>
+   <signal>returnPressed()</signal>
+   <receiver>cmdSendButton_2</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1774</x>
+     <y>658</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1858</x>
+     <y>653</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
