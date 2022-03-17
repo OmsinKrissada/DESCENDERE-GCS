@@ -994,15 +994,63 @@ class Ui_MainWindow(object):
         self.gridLayout_3.addWidget(self.mission_box, 3, 2, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1920, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1920, 18))
         font = QtGui.QFont()
         self.menubar.setFont(font)
-        self.menubar.setStyleSheet("color: rgb(255, 255, 255);")
+        self.menubar.setStyleSheet("QMenuBar {\n"
+"    background-color: #1c1c28;\n"
+"    spacing: 3px; /* spacing between menu bar items */\n"
+"    color: white;\n"
+"}\n"
+"\n"
+"QMenuBar::item {\n"
+"    padding: 1px 4px;\n"
+"    background: transparent;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"\n"
+"QMenuBar::item:selected { /* when selected using mouse or keyboard */\n"
+"    background: #a8a8a8;\n"
+"}\n"
+"\n"
+"QMenuBar::item:pressed {\n"
+"    background: #888888;\n"
+"}\n"
+"\n"
+"QMenu {\n"
+"    background-color: rgb(40, 41, 61); /* sets background of the menu */\n"
+"    border: 1px solid gray;\n"
+"    color: white;\n"
+"}\n"
+"\n"
+"QMenu::item {\n"
+"    /* sets background of menu item. set this to something non-transparent\n"
+"        if you want menu color and menu item color to be different */\n"
+"    background-color: transparent;\n"
+"}\n"
+"\n"
+"QMenu::item:selected { /* when user selects item using mouse or keyboard */\n"
+"    /* background-color: #654321; */\n"
+"    background-color: rgba(231, 231, 231, 20);\n"
+"}\n"
+"\n"
+"QMenu::separator {\n"
+"    height: 1px;\n"
+"    background: gray;\n"
+"    margin-left: 10px;\n"
+"    margin-right: 5px;\n"
+"    margin-top: 5px;\n"
+"    margin-bottom: 5px;\n"
+"}")
         self.menubar.setObjectName("menubar")
         self.menuFile = QtWidgets.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
         self.menuTest = QtWidgets.QMenu(self.menubar)
         self.menuTest.setObjectName("menuTest")
+        self.menuPayload = QtWidgets.QMenu(self.menuTest)
+        self.menuPayload.setObjectName("menuPayload")
+        self.menuSet_Container_State = QtWidgets.QMenu(self.menuTest)
+        self.menuSet_Container_State.setObjectName("menuSet_Container_State")
         self.menuWindow = QtWidgets.QMenu(self.menubar)
         self.menuWindow.setObjectName("menuWindow")
         self.menuMQTT = QtWidgets.QMenu(self.menubar)
@@ -1010,12 +1058,10 @@ class Ui_MainWindow(object):
         MainWindow.setMenuBar(self.menubar)
         self.actionSave = QtWidgets.QAction(MainWindow)
         self.actionSave.setObjectName("actionSave")
-        self.actionForce_begin_payload_deployment = QtWidgets.QAction(MainWindow)
-        self.actionForce_begin_payload_deployment.setObjectName("actionForce_begin_payload_deployment")
-        self.actionReset_camera_rotation = QtWidgets.QAction(MainWindow)
-        self.actionReset_camera_rotation.setObjectName("actionReset_camera_rotation")
-        self.actionForce_parachute_deployment = QtWidgets.QAction(MainWindow)
-        self.actionForce_parachute_deployment.setObjectName("actionForce_parachute_deployment")
+        self.actionReset_Camera_Rotation = QtWidgets.QAction(MainWindow)
+        self.actionReset_Camera_Rotation.setObjectName("actionReset_Camera_Rotation")
+        self.actionParachute = QtWidgets.QAction(MainWindow)
+        self.actionParachute.setObjectName("actionParachute")
         self.actionForce_2nd_parachute_deployment = QtWidgets.QAction(MainWindow)
         self.actionForce_2nd_parachute_deployment.setObjectName("actionForce_2nd_parachute_deployment")
         self.actionForce_stop_payload_deployment = QtWidgets.QAction(MainWindow)
@@ -1033,18 +1079,46 @@ class Ui_MainWindow(object):
         self.actionEnable.setObjectName("actionEnable")
         self.actionDisable = QtWidgets.QAction(MainWindow)
         self.actionDisable.setObjectName("actionDisable")
-        self.actionPing_payload = QtWidgets.QAction(MainWindow)
-        self.actionPing_payload.setObjectName("actionPing_payload")
+        self.actionPoll = QtWidgets.QAction(MainWindow)
+        self.actionPoll.setObjectName("actionPoll")
         self.actionStart_break_sequence = QtWidgets.QAction(MainWindow)
         self.actionStart_break_sequence.setObjectName("actionStart_break_sequence")
+        self.actionRelease_Sequence = QtWidgets.QAction(MainWindow)
+        self.actionRelease_Sequence.setObjectName("actionRelease_Sequence")
+        self.actionRelease = QtWidgets.QAction(MainWindow)
+        self.actionRelease.setObjectName("actionRelease")
+        self.actionBreak = QtWidgets.QAction(MainWindow)
+        self.actionBreak.setObjectName("actionBreak")
+        self.action1_PRELAUNCH = QtWidgets.QAction(MainWindow)
+        self.action1_PRELAUNCH.setObjectName("action1_PRELAUNCH")
+        self.action2_LAUNCH = QtWidgets.QAction(MainWindow)
+        self.action2_LAUNCH.setObjectName("action2_LAUNCH")
+        self.action3_PARADEPLOY = QtWidgets.QAction(MainWindow)
+        self.action3_PARADEPLOY.setObjectName("action3_PARADEPLOY")
+        self.action4_TPDEPLOY = QtWidgets.QAction(MainWindow)
+        self.action4_TPDEPLOY.setObjectName("action4_TPDEPLOY")
+        self.action5_RELEASED = QtWidgets.QAction(MainWindow)
+        self.action5_RELEASED.setObjectName("action5_RELEASED")
+        self.actionCalibrate_Gimbal_IMU = QtWidgets.QAction(MainWindow)
+        self.actionCalibrate_Gimbal_IMU.setObjectName("actionCalibrate_Gimbal_IMU")
         self.menuFile.addAction(self.actionSave)
         self.menuFile.addAction(self.actionOpen_simulation_file)
-        self.menuTest.addAction(self.actionForce_parachute_deployment)
+        self.menuPayload.addAction(self.actionRelease_Sequence)
+        self.menuPayload.addAction(self.actionRelease)
+        self.menuPayload.addAction(self.actionBreak)
+        self.menuSet_Container_State.addAction(self.action1_PRELAUNCH)
+        self.menuSet_Container_State.addAction(self.action2_LAUNCH)
+        self.menuSet_Container_State.addAction(self.action3_PARADEPLOY)
+        self.menuSet_Container_State.addAction(self.action4_TPDEPLOY)
+        self.menuSet_Container_State.addAction(self.action5_RELEASED)
+        self.menuTest.addAction(self.actionParachute)
+        self.menuTest.addAction(self.actionPoll)
         self.menuTest.addSeparator()
-        self.menuTest.addAction(self.actionForce_begin_payload_deployment)
+        self.menuTest.addAction(self.actionReset_Camera_Rotation)
+        self.menuTest.addAction(self.actionCalibrate_Gimbal_IMU)
         self.menuTest.addSeparator()
-        self.menuTest.addAction(self.actionPing_payload)
-        self.menuTest.addAction(self.actionReset_camera_rotation)
+        self.menuTest.addAction(self.menuPayload.menuAction())
+        self.menuTest.addAction(self.menuSet_Container_State.menuAction())
         self.menuWindow.addAction(self.actionFull_Screen)
         self.menuWindow.addAction(self.actionExit)
         self.menuMQTT.addAction(self.actionEnable)
@@ -1126,12 +1200,13 @@ class Ui_MainWindow(object):
         self.label_6.setText(_translate("MainWindow", "PD"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.menuTest.setTitle(_translate("MainWindow", "Testing"))
+        self.menuPayload.setTitle(_translate("MainWindow", "Break System"))
+        self.menuSet_Container_State.setTitle(_translate("MainWindow", "Set Container State"))
         self.menuWindow.setTitle(_translate("MainWindow", "Window"))
         self.menuMQTT.setTitle(_translate("MainWindow", "MQTT"))
         self.actionSave.setText(_translate("MainWindow", "Open CSV file location"))
-        self.actionForce_begin_payload_deployment.setText(_translate("MainWindow", "Force begin payload deploy sequence"))
-        self.actionReset_camera_rotation.setText(_translate("MainWindow", "Reset camera rotation"))
-        self.actionForce_parachute_deployment.setText(_translate("MainWindow", "Force parachute deployment"))
+        self.actionReset_Camera_Rotation.setText(_translate("MainWindow", "Reset Camera Rotation"))
+        self.actionParachute.setText(_translate("MainWindow", "Deploy Parachute"))
         self.actionForce_2nd_parachute_deployment.setText(_translate("MainWindow", "Force 2nd parachute deployment"))
         self.actionForce_stop_payload_deployment.setText(_translate("MainWindow", "Force stop payload deployment"))
         self.actionFull_Screen.setText(_translate("MainWindow", "Full Screen"))
@@ -1141,8 +1216,17 @@ class Ui_MainWindow(object):
         self.actionExit.setText(_translate("MainWindow", "Exit"))
         self.actionEnable.setText(_translate("MainWindow", "Enable"))
         self.actionDisable.setText(_translate("MainWindow", "Disable"))
-        self.actionPing_payload.setText(_translate("MainWindow", "Poll payload"))
+        self.actionPoll.setText(_translate("MainWindow", "Poll Payload"))
         self.actionStart_break_sequence.setText(_translate("MainWindow", "Start break sequence"))
+        self.actionRelease_Sequence.setText(_translate("MainWindow", "Run Sequence"))
+        self.actionRelease.setText(_translate("MainWindow", "Release"))
+        self.actionBreak.setText(_translate("MainWindow", "Break"))
+        self.action1_PRELAUNCH.setText(_translate("MainWindow", "1 - PRELAUNCH"))
+        self.action2_LAUNCH.setText(_translate("MainWindow", "2 - LAUNCH"))
+        self.action3_PARADEPLOY.setText(_translate("MainWindow", "3 - PARADEPLOY"))
+        self.action4_TPDEPLOY.setText(_translate("MainWindow", "4 - TPDEPLOY (also start  polling payload)"))
+        self.action5_RELEASED.setText(_translate("MainWindow", "5 - RELEASED"))
+        self.actionCalibrate_Gimbal_IMU.setText(_translate("MainWindow", "Calibrate Gimbal IMU"))
 from PyQt5 import QtWebEngineWidgets
 from pyqtgraph import PlotWidget
 import resources_rc

@@ -2063,14 +2063,58 @@ QProgressBar::chunk {
      <x>0</x>
      <y>0</y>
      <width>1920</width>
-     <height>21</height>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
     <font/>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(255, 255, 255);</string>
+    <string notr="true">QMenuBar {
+	background-color: #1c1c28;
+    spacing: 3px; /* spacing between menu bar items */
+	color: white;
+}
+
+QMenuBar::item {
+    padding: 1px 4px;
+    background: transparent;
+    border-radius: 4px;
+}
+
+QMenuBar::item:selected { /* when selected using mouse or keyboard */
+    background: #a8a8a8;
+}
+
+QMenuBar::item:pressed {
+    background: #888888;
+}
+
+QMenu {
+    background-color: rgb(40, 41, 61); /* sets background of the menu */
+    border: 1px solid gray;
+	color: white;
+}
+
+QMenu::item {
+    /* sets background of menu item. set this to something non-transparent
+        if you want menu color and menu item color to be different */
+    background-color: transparent;
+}
+
+QMenu::item:selected { /* when user selects item using mouse or keyboard */
+    /* background-color: #654321; */
+	background-color: rgba(231, 231, 231, 20);
+}
+
+QMenu::separator {
+	height: 1px;
+    background: gray;
+    margin-left: 10px;
+    margin-right: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}</string>
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
@@ -2083,12 +2127,32 @@ QProgressBar::chunk {
     <property name="title">
      <string>Testing</string>
     </property>
-    <addaction name="actionForce_parachute_deployment"/>
+    <widget class="QMenu" name="menuPayload">
+     <property name="title">
+      <string>Break System</string>
+     </property>
+     <addaction name="actionRelease_Sequence"/>
+     <addaction name="actionRelease"/>
+     <addaction name="actionBreak"/>
+    </widget>
+    <widget class="QMenu" name="menuSet_Container_State">
+     <property name="title">
+      <string>Set Container State</string>
+     </property>
+     <addaction name="action1_PRELAUNCH"/>
+     <addaction name="action2_LAUNCH"/>
+     <addaction name="action3_PARADEPLOY"/>
+     <addaction name="action4_TPDEPLOY"/>
+     <addaction name="action5_RELEASED"/>
+    </widget>
+    <addaction name="actionParachute"/>
+    <addaction name="actionPoll"/>
     <addaction name="separator"/>
-    <addaction name="actionForce_begin_payload_deployment"/>
+    <addaction name="actionReset_Camera_Rotation"/>
+    <addaction name="actionCalibrate_Gimbal_IMU"/>
     <addaction name="separator"/>
-    <addaction name="actionPing_payload"/>
-    <addaction name="actionReset_camera_rotation"/>
+    <addaction name="menuPayload"/>
+    <addaction name="menuSet_Container_State"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
@@ -2114,19 +2178,14 @@ QProgressBar::chunk {
     <string>Open CSV file location</string>
    </property>
   </action>
-  <action name="actionForce_begin_payload_deployment">
+  <action name="actionReset_Camera_Rotation">
    <property name="text">
-    <string>Force begin payload deploy sequence</string>
+    <string>Reset Camera Rotation</string>
    </property>
   </action>
-  <action name="actionReset_camera_rotation">
+  <action name="actionParachute">
    <property name="text">
-    <string>Reset camera rotation</string>
-   </property>
-  </action>
-  <action name="actionForce_parachute_deployment">
-   <property name="text">
-    <string>Force parachute deployment</string>
+    <string>Deploy Parachute</string>
    </property>
   </action>
   <action name="actionForce_2nd_parachute_deployment">
@@ -2175,14 +2234,59 @@ QProgressBar::chunk {
     <string>Disable</string>
    </property>
   </action>
-  <action name="actionPing_payload">
+  <action name="actionPoll">
    <property name="text">
-    <string>Poll payload</string>
+    <string>Poll Payload</string>
    </property>
   </action>
   <action name="actionStart_break_sequence">
    <property name="text">
     <string>Start break sequence</string>
+   </property>
+  </action>
+  <action name="actionRelease_Sequence">
+   <property name="text">
+    <string>Run Sequence</string>
+   </property>
+  </action>
+  <action name="actionRelease">
+   <property name="text">
+    <string>Release</string>
+   </property>
+  </action>
+  <action name="actionBreak">
+   <property name="text">
+    <string>Break</string>
+   </property>
+  </action>
+  <action name="action1_PRELAUNCH">
+   <property name="text">
+    <string>1 - PRELAUNCH</string>
+   </property>
+  </action>
+  <action name="action2_LAUNCH">
+   <property name="text">
+    <string>2 - LAUNCH</string>
+   </property>
+  </action>
+  <action name="action3_PARADEPLOY">
+   <property name="text">
+    <string>3 - PARADEPLOY</string>
+   </property>
+  </action>
+  <action name="action4_TPDEPLOY">
+   <property name="text">
+    <string>4 - TPDEPLOY (also start  polling payload)</string>
+   </property>
+  </action>
+  <action name="action5_RELEASED">
+   <property name="text">
+    <string>5 - RELEASED</string>
+   </property>
+  </action>
+  <action name="actionCalibrate_Gimbal_IMU">
+   <property name="text">
+    <string>Calibrate Gimbal IMU</string>
    </property>
   </action>
  </widget>

@@ -166,16 +166,30 @@ class App(QMainWindow):
         '''
         Connect UI components with their respective functions.
         '''
-        self.ui.actionForce_parachute_deployment.triggered.connect(
+        self.ui.actionParachute.triggered.connect(
             lambda: self.telemetry.sendCommand('FORCE', 'PARADEPLOY'))
-        self.ui.actionForce_timed_payload_deployment.triggered.connect(
-            lambda: self.telemetry.sendCommand('FORCE', 'TIMEDPL'))
-        self.ui.actionForce_begin_payload_deployment.triggered.connect(
-            lambda: self.telemetry.sendCommand('FORCE', 'BEGINPL'))
-        self.ui.actionForce_stop_payload_deployment.triggered.connect(
-            lambda: self.telemetry.sendCommand('FORCE', 'STOPPL'))
-        self.ui.actionReset_camera_rotation.triggered.connect(
-            lambda: self.telemetry.sendCommand('FORCE', 'RESETCAMPOS'))
+        self.ui.actionPoll.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'POLL'))
+        self.ui.actionReset_Camera_Rotation.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'RESETCAM'))
+        self.ui.actionCalibrate_Gimbal_IMU.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'CALCAM'))
+        self.ui.actionRelease_Sequence.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'SEQUENCE'))
+        self.ui.actionRelease.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'RELEASE'))
+        self.ui.actionBreak.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'BREAK'))
+        self.ui.action1_PRELAUNCH.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'STATE1'))
+        self.ui.action2_LAUNCH.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'STATE2'))
+        self.ui.action3_PARADEPLOY.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'STATE3'))
+        self.ui.action4_TPDEPLOY.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'STATE4'))
+        self.ui.action5_RELEASED.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'STATE5'))
 
         self.ui.actionFull_Screen.triggered.connect(self.toggleFullScreen)
         self.ui.actionExit.triggered.connect(self.close)
