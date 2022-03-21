@@ -96,6 +96,7 @@ class App(QMainWindow):
         self.p_mag_y_data = []
         self.p_ptr_err_data = []
         self.p_voltage_data = []
+        self.coords = []
 
         for g in graphs:
             self.formatGraph(g[0], g[1], g[2])
@@ -431,8 +432,22 @@ class App(QMainWindow):
         self.ui.sim_file_display.setText(self.sim_filename.split('/')[-1])
 
     def updateMap(self, coords: tuple):
-        kml = simplekml.Kml()
-        pass
+        # self.coords.append(coords)
+        # kml = simplekml.Kml()
+        # kml.newpoint(coords=self.coords)
+        # kml.save("Save.kml")
+        self.coords += f'{coords[1]},{coords[0]},{self.c_gps_altitude_data[-1]}\n'
+        with open('data.kml', 'w') as file:
+            file.writelines('<kml xmlns="http://www.opengis.net/kml/2.2" '
+                            'xmlns:gx="http://www.google.com/kml/ext/2.2">'
+                            '<Folder><name>Log</name><Placemark><name>SPOROS</name>'
+                            '<styleUrl>#yellowLineGreenPoly</styleUrl><Style>'
+                            '<LineStyle><color>ff00ffff</color><colorMode>normal</colorMode><width>4</width></LineStyle>'
+                            '</Style><LineString><extrude>1</extrude><altitudeMode>absolute</altitudeMode><coordinates>'+'\n')
+            file.writelines(self.coords)
+            file.writelines(
+                '\n' + '</coordinates></LineString></Placemark></Folder></kml>')
+        # pass
         # self.ui.lat_value.setText(str(coords[0]))
         # self.ui.lng_value.setText(str(coords[1]))
         # if self.map_initialized:

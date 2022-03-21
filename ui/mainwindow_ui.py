@@ -1223,8 +1223,8 @@ class Ui_MainWindow(object):
         self.actionBreak.setText(_translate("MainWindow", "Break"))
         self.action1_PRELAUNCH.setText(_translate("MainWindow", "1 - PRELAUNCH"))
         self.action2_LAUNCH.setText(_translate("MainWindow", "2 - LAUNCH"))
-        self.action3_PARADEPLOY.setText(_translate("MainWindow", "3 - PARADEPLOY"))
-        self.action4_TPDEPLOY.setText(_translate("MainWindow", "4 - TPDEPLOY (also start  polling payload)"))
+        self.action3_PARADEPLOY.setText(_translate("MainWindow", "3 - PARADEPLOY  (also start polling payload)"))
+        self.action4_TPDEPLOY.setText(_translate("MainWindow", "4 - TPDEPLOY"))
         self.action5_RELEASED.setText(_translate("MainWindow", "5 - RELEASED"))
         self.actionCalibrate_Gimbal_IMU.setText(_translate("MainWindow", "Calibrate Gimbal IMU"))
 from PyQt5 import QtWebEngineWidgets

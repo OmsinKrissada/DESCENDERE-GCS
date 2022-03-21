@@ -2271,12 +2271,12 @@ QMenu::separator {
   </action>
   <action name="action3_PARADEPLOY">
    <property name="text">
-    <string>3 - PARADEPLOY</string>
+    <string>3 - PARADEPLOY  (also start polling payload)</string>
    </property>
   </action>
   <action name="action4_TPDEPLOY">
    <property name="text">
-    <string>4 - TPDEPLOY (also start  polling payload)</string>
+    <string>4 - TPDEPLOY</string>
    </property>
   </action>
   <action name="action5_RELEASED">
