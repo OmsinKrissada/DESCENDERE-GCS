@@ -37,8 +37,8 @@ class App(QMainWindow):
         # self.showMaximized()
 
         # Initialize map
-        self.ui.gps_map.setHtml(
-            '<h1 style="height: 100%; text-align: center; font-family: Inter; background-color: #1c1c28; color: white;">No Data Available</h1>')
+        # self.ui.gps_map.setHtml(
+        #     '<h1 style="height: 100%; text-align: center; font-family: Inter; background-color: #1c1c28; color: white;">No Data Available</h1>')
         self.map_initialized = False
 
         # Initilize MQTT
@@ -177,6 +177,8 @@ class App(QMainWindow):
             lambda: self.telemetry.sendCommand('FORCE', 'CALCAM'))
         self.ui.actionRelease_Sequence.triggered.connect(
             lambda: self.telemetry.sendCommand('FORCE', 'SEQUENCE'))
+        self.ui.actionHalt_Sequence.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'HALT'))
         self.ui.actionRelease.triggered.connect(
             lambda: self.telemetry.sendCommand('FORCE', 'RELEASE'))
         self.ui.actionBreak.triggered.connect(
@@ -208,7 +210,7 @@ class App(QMainWindow):
 
     def handleTelemetry(self, data: str):
         # Display in log widget
-        if(not self.ui.telemetry_log or self.ui.telemetry_log == '\r' or self.ui.telemetry_log == '\r\r' or self.ui.telemetry_log == '\r\r\r' or self.ui.telemetry_log == '\n' or self.ui.telemetry_log is None):
+        if(not data or data == '\r' or data == '\n'):
             return
         self.ui.telemetry_log.append(f'📩 {data}')
         if self.ui.autoscroll_check.isChecked():
@@ -227,9 +229,9 @@ class App(QMainWindow):
                 f.write(data+'\n')
             self.latest_container_telemetry = pkg[:]
             self.updateContainer()
-        elif pkg[3] == 'P':
+        elif pkg[3] == 'T':
             # logger.info(f'[PAYLOAD]: {data}')
-            with open('Flight_1022_P_with_corrupted.csv', 'a') as f:
+            with open('Flight_1022_T_with_corrupted.csv', 'a') as f:
                 f.write(data+'\n')
             self.latest_payload_telemetry = pkg[:]
             self.updatePayload()
@@ -332,7 +334,7 @@ class App(QMainWindow):
             self.payload_healthy_pkg += 1
             self.ui.p_healthy_pkg_count.setText(
                 str(self.payload_healthy_pkg))
-            with open('Flight_1022_P.csv', 'a') as file:
+            with open('Flight_1022_T.csv', 'a') as file:
                 file.write(','.join(self.latest_payload_telemetry)+'\n')
         except Exception:
             self.payload_corrupted_pkg += 1
