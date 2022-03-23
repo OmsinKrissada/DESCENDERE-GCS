@@ -20,7 +20,7 @@ import sys
 import io
 import time
 import pyqtgraph as pg
-import csv
+import os
 import simplekml
 import paho.mqtt.client as mqtt
 
@@ -37,8 +37,13 @@ class App(QMainWindow):
         # self.showMaximized()
 
         # Initialize map
-        # self.ui.gps_map.setHtml(
-        #     '<h1 style="height: 100%; text-align: center; font-family: Inter; background-color: #1c1c28; color: white;">No Data Available</h1>')
+        if (os.path.exists('data.kml')):
+            i = 0
+            path = f'data_{i}.kml'
+            while(os.path.exists(path)):
+                path = f'data_{i}.kml'
+                i += 1
+            os.rename('data.kml', f'data_{i}.kml')
         self.map_initialized = False
 
         # Initilize MQTT
