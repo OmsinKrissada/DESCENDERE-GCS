@@ -2883,11 +2883,12 @@ QMenu::separator {
     <property name="title">
      <string>FSW State Overwrite</string>
     </property>
-    <addaction name="action1_PRELAUNCH"/>
-    <addaction name="action2_LAUNCH"/>
-    <addaction name="action3_PARADEPLOY"/>
-    <addaction name="action4_TPDEPLOY"/>
-    <addaction name="action5_RELEASED"/>
+    <addaction name="action0_PRELAUNCH"/>
+    <addaction name="action1_LAUNCH"/>
+    <addaction name="action2_PARADEPLOY"/>
+    <addaction name="action3_TPDEPLOY"/>
+    <addaction name="action4_RELEASED"/>
+    <addaction name="action5_LAND"/>
    </widget>
    <widget class="QMenu" name="menuBreak_System">
     <property name="title">
@@ -3004,29 +3005,34 @@ QMenu::separator {
     <string>Halt Sequence</string>
    </property>
   </action>
-  <action name="action1_PRELAUNCH">
+  <action name="action0_PRELAUNCH">
    <property name="text">
-    <string>1 - PRELAUNCH</string>
+    <string>0 - PRELAUNCH</string>
    </property>
   </action>
-  <action name="action2_LAUNCH">
+  <action name="action1_LAUNCH">
    <property name="text">
-    <string>2 - LAUNCH</string>
+    <string>1 - LAUNCH</string>
    </property>
   </action>
-  <action name="action3_PARADEPLOY">
+  <action name="action2_PARADEPLOY">
    <property name="text">
-    <string>3 - PARADEPLOY</string>
+    <string>2 - PARADEPLOY</string>
    </property>
   </action>
-  <action name="action4_TPDEPLOY">
+  <action name="action3_TPDEPLOY">
    <property name="text">
-    <string>4 - TPDEPLOY (also start polling payload)</string>
+    <string>3 - TPDEPLOY (also start polling payload)</string>
    </property>
   </action>
-  <action name="action5_RELEASED">
+  <action name="action4_RELEASED">
    <property name="text">
-    <string>5 - RELEASED</string>
+    <string>4 - RELEASED</string>
+   </property>
+  </action>
+  <action name="action5_LAND">
+   <property name="text">
+    <string>5 - LAND</string>
    </property>
   </action>
  </widget>

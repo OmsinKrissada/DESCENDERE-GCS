@@ -187,15 +187,17 @@ class App(QMainWindow):
             lambda: self.telemetry.sendCommand('FORCE', 'RELEASE'))
         self.ui.actionBreak.triggered.connect(
             lambda: self.telemetry.sendCommand('FORCE', 'BREAK'))
-        self.ui.action1_PRELAUNCH.triggered.connect(
+        self.ui.action0_PRELAUNCH.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'STATE0'))
+        self.ui.action1_LAUNCH.triggered.connect(
             lambda: self.telemetry.sendCommand('FORCE', 'STATE1'))
-        self.ui.action2_LAUNCH.triggered.connect(
+        self.ui.action2_PARADEPLOY.triggered.connect(
             lambda: self.telemetry.sendCommand('FORCE', 'STATE2'))
-        self.ui.action3_PARADEPLOY.triggered.connect(
+        self.ui.action3_TPDEPLOY.triggered.connect(
             lambda: self.telemetry.sendCommand('FORCE', 'STATE3'))
-        self.ui.action4_TPDEPLOY.triggered.connect(
+        self.ui.action4_RELEASED.triggered.connect(
             lambda: self.telemetry.sendCommand('FORCE', 'STATE4'))
-        self.ui.action5_RELEASED.triggered.connect(
+        self.ui.action5_LAND.triggered.connect(
             lambda: self.telemetry.sendCommand('FORCE', 'STATE5'))
 
         self.ui.actionFull_Screen.triggered.connect(self.toggleFullScreen)
