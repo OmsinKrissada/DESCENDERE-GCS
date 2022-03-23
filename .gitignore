@@ -131,4 +131,4 @@ dmypy.json
 .idea/workspace.xml
 
 Flight*.csv
-data.kml
+data*.kml

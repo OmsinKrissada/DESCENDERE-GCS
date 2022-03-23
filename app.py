@@ -1,14 +1,12 @@
 from PyQt5 import QtCore
 from PyQt5.QtCore import QThread, QTimer
-from PyQt5.QtGui import QFont
-from pyqtgraph import PlotWidget
 from port import DisconnectException
 from datetime import datetime
 
 from ui.mainwindow_ui import Ui_MainWindow
 from communication import TelemetryHandler, Port
 from logger import logger
-# from chart import GraphicGraph
+from chart import Chart
 from rtc import RTC
 import settings
 
@@ -41,8 +39,8 @@ class App(QMainWindow):
             i = 0
             path = f'data_{i}.kml'
             while(os.path.exists(path)):
-                path = f'data_{i}.kml'
                 i += 1
+                path = f'data_{i}.kml'
             os.rename('data.kml', f'data_{i}.kml')
         self.map_initialized = False
 
@@ -56,18 +54,26 @@ class App(QMainWindow):
         self.mqtt_client.username_pw_set('1022', 'Teasgote783')
 
         # Initialize charts
-        graphs = [
-            [self.ui.c_temp_chart, 'Temperature', '°C'],
-            [self.ui.c_altitude_chart, 'Altitude', 'm'],
-            [self.ui.c_gps_altitude_chart, 'GPS Altitude', 'm'],
-            [self.ui.c_voltage_chart, 'Voltage', 'V'],
-            [self.ui.p_temp_chart, 'Temperature', '°C'],
-            [self.ui.p_gyro_chart, 'Gyroscope', 'degrees/s'],
-            [self.ui.p_accel_chart, 'Acceleration', 'm/s^2'],
-            [self.ui.p_mag_chart, 'Magnatic Field', 'gauss'],
-            [self.ui.p_ptr_err_chart, 'Pointing Error', 'degrees'],
-            [self.ui.p_voltage_chart, 'Voltage', 'V'],
-        ]
+        self.c_temp_chart = Chart(
+            self.ui.c_temp_chart, self.ui.c_temp_value, '°C')
+        self.c_altitude_chart = Chart(
+            self.ui.c_altitude_chart, self.ui.c_altitude_value, 'm')
+        self.c_gps_altitude_chart = Chart(
+            self.ui.c_gps_altitude_chart, self.ui.c_gps_altitude_value, 'm')
+        self.c_voltage_chart = Chart(
+            self.ui.c_voltage_chart, self.ui.c_voltage_value, 'V')
+        self.p_temp_chart = Chart(
+            self.ui.p_temp_chart, self.ui.p_temp_value, '°C')
+        self.p_gyro_chart = Chart(
+            self.ui.p_gyro_chart, self.ui.p_gyro_value, 'degrees/s')
+        self.p_accel_chart = Chart(
+            self.ui.p_accel_chart, self.ui.p_accel_value, 'm/s²')
+        self.p_mag_chart = Chart(
+            self.ui.p_mag_chart, self.ui.p_mag_value, 'gauss')
+        self.p_ptr_err_chart = Chart(
+            self.ui.p_ptr_err_chart, self.ui.p_ptr_err_value, 'degrees')
+        self.p_voltage_chart = Chart(
+            self.ui.p_voltage_chart, self.ui.p_voltage_value, 'V')
 
         # Initialize chart data
         self.container_healthy_pkg = 0
@@ -98,9 +104,6 @@ class App(QMainWindow):
         self.p_ptr_err_data = []
         self.p_voltage_data = []
         self.coords = []
-
-        for g in graphs:
-            self.formatGraph(g[0], g[1], g[2])
 
         # Display available ports, if at least one available, initiate TelemetryHandler first in the list
         available_ports = Port.list()
@@ -327,13 +330,11 @@ class App(QMainWindow):
         self.ui.c_state.setText(SOFTWARE_STATE)
 
         # Update chart
-        self.plot(self.ui.c_temp_chart, self.c_pkg_data, self.c_temp_data)
-        self.plot(self.ui.c_altitude_chart,
-                  self.c_pkg_data, self.c_altitude_data)
-        self.plot(self.ui.c_gps_altitude_chart,
-                  self.c_pkg_data, self.c_gps_altitude_data)
-        self.plot(self.ui.c_voltage_chart,
-                  self.c_pkg_data, self.c_voltage_data)
+        self.c_temp_chart.plot(self.c_pkg_data, self.c_temp_data)
+        self.c_altitude_chart .plot(self.c_pkg_data, self.c_altitude_data)
+        self.c_gps_altitude_chart .plot(
+            self.c_pkg_data, self.c_gps_altitude_data)
+        self.c_voltage_chart .plot(self.c_pkg_data, self.c_voltage_data)
 
         # Update map
         self.updateMap((GPS_LATITUDE, GPS_LONGITUDE))
@@ -385,17 +386,15 @@ class App(QMainWindow):
         self.ui.p_state.setText(TP_SOFTWARE_STATE)
 
         # Update chart
-        self.plot(self.ui.p_temp_chart, self.p_pkg_data, self.p_temp_data)
-        self.plot(self.ui.p_gyro_chart,
-                  self.p_pkg_data, (self.p_gyro_r_data, self.p_gyro_p_data, self.p_gyro_y_data))
-        self.plot(self.ui.p_accel_chart,
-                  self.p_pkg_data, (self.p_accel_r_data, self.p_accel_p_data, self.p_accel_y_data))
-        self.plot(self.ui.p_mag_chart,
-                  self.p_pkg_data, (self.p_mag_r_data, self.p_mag_p_data, self.p_mag_y_data))
-        self.plot(self.ui.p_ptr_err_chart,
-                  self.p_pkg_data, self.p_ptr_err_data)
-        self.plot(self.ui.p_voltage_chart,
-                  self.p_pkg_data, self.p_voltage_data)
+        self.p_temp_chart.plot(self.p_pkg_data, self.p_temp_data)
+        self.p_gyro_chart.plot(
+            self.p_pkg_data, (self.p_gyro_r_data, self.p_gyro_p_data, self.p_gyro_y_data))
+        self.p_accel_chart.plot(
+            self.p_pkg_data, (self.p_accel_r_data, self.p_accel_p_data, self.p_accel_y_data))
+        self.p_mag_chart.plot(
+            self.p_pkg_data, (self.p_mag_r_data, self.p_mag_p_data, self.p_mag_y_data))
+        self.p_ptr_err_chart.plot(self.p_pkg_data, self.p_ptr_err_data)
+        self.p_voltage_chart.plot(self.p_pkg_data, self.p_voltage_data)
 
         # Update battery
         bat_percent = self.batteryPercentage(float(TP_VOLTAGE))
@@ -407,19 +406,6 @@ class App(QMainWindow):
     #     data.append(new_data)
     #     if data.__len__() > 30:
     #         data.pop(0)
-
-    def formatGraph(self, graph: PlotWidget, title: str, unit: str = ''):
-        graph.setTitle(title)
-        graph.setLabel('left', f'{title} ({unit})')
-        graph.setLabel('bottom', 'Packet Count')
-        graph.getAxis(
-            'bottom').setTickFont(QFont("Consolas"))
-        graph.getAxis(
-            'left').setTickFont(QFont("Consolas"))
-
-    def plot(self, chart: PlotWidget, x: list, y: list, **options):
-        plottingThread = PlottingThread(chart, x, y, **options)
-        plottingThread.start()
 
     def batteryPercentage(self, voltage: float):
         return ((voltage-5.2)/3.2)*100
@@ -519,51 +505,6 @@ class LifecycleThread(QThread):
         self._isRunning = False
         self.terminate()
         logger.info('Lifecycle thread stopped')
-
-
-class PlottingThread(QThread):
-
-    # Carriers
-    # lifecycleRequested = QtCore.pyqtSignal(object)
-
-    def __init__(self, chart: PlotWidget, x: list, y: list, **options):
-        self.chart = chart
-        self.x = x
-        self.y = y
-        self.options = options
-        self._isRunning = True
-        QThread.__init__(self)
-
-    def __del__(self):
-        self.wait()
-
-    def run(self):
-        logger.info('Plotting thread started')
-        plot_options = {
-            **{'x': self.x, 'y': self.y, 'symbol': 'o', 'symbolSize': 6}, **self.options}
-        # print(plot_options)
-        # chart.plot()
-        # print(self.y[-30:-1])
-        self.chart.clear()
-        # self.chart.setRange(
-        #     xRange=[window.c_pkg_data[-1]-30, window.c_pkg_data[-1]])
-        if type(self.y) is tuple:
-            self.chart.plot(**{'x': self.x[-30:-1], 'y': self.y[0][-30:-1],
-                               'symbol': 'o', 'symbolSize': 6, 'symbolPen': 'r', 'pen': 'r'})
-            self.chart.plot(**{'x': self.x[-30:-1], 'y': self.y[1][-30:-1],
-                               'symbol': 'o', 'symbolSize': 6, 'symbolPen': 'g', 'pen': 'g'})
-            self.chart.plot(**{'x': self.x[-30:-1], 'y': self.y[2][-30:-1],
-                               'symbol': 'o', 'symbolSize': 6, 'symbolPen': 'c', 'pen': 'c'})
-        else:
-            self.chart.plot(**{'x': self.x[-30:-1], 'y': self.y[-30:-1],
-                               'symbol': 'o', 'symbolSize': 6})
-        # self.plot()
-
-    # def plot(self):
-
-    def stop(self):
-        self._isRunning = False
-        self.terminate()
 
 
 class TelemetryThread(QThread):
