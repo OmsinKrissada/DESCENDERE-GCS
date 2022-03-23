@@ -327,135 +327,135 @@ border-radius: 100px;</string>
             </layout>
            </widget>
           </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="position_box">
+         <property name="minimumSize">
+          <size>
+           <width>214</width>
+           <height>40</height>
+          </size>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout">
           <item>
-           <widget class="QGroupBox" name="position_box">
-            <property name="minimumSize">
+           <widget class="QLabel" name="lng_title_2">
+            <property name="font">
+             <font>
+              <family>Inter</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: #8f90a6;</string>
+            </property>
+            <property name="text">
+             <string>Satellite Connected:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="sats_value">
+            <property name="font">
+             <font>
+              <family>Consolas</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>-</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Preferred</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
              <size>
-              <width>214</width>
-              <height>40</height>
+              <width>40</width>
+              <height>20</height>
              </size>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout">
-             <item>
-              <widget class="QLabel" name="lng_title_2">
-               <property name="font">
-                <font>
-                 <family>Inter</family>
-                 <pointsize>12</pointsize>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">color: #8f90a6;</string>
-               </property>
-               <property name="text">
-                <string>Satellite Connected:</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="sats_value">
-               <property name="font">
-                <font>
-                 <family>Consolas</family>
-                 <pointsize>12</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>-</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_2">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Preferred</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QLabel" name="lat_title">
-               <property name="font">
-                <font>
-                 <family>Inter</family>
-                 <pointsize>12</pointsize>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">color: #8f90a6;</string>
-               </property>
-               <property name="text">
-                <string>Latitude:</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="lat_value">
-               <property name="font">
-                <font>
-                 <family>Consolas</family>
-                 <pointsize>12</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>-</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_3">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Preferred</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>20</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QLabel" name="lng_title">
-               <property name="font">
-                <font>
-                 <family>Inter</family>
-                 <pointsize>12</pointsize>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">color: #8f90a6;</string>
-               </property>
-               <property name="text">
-                <string>Longitude:</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QLabel" name="lng_value">
-               <property name="font">
-                <font>
-                 <family>Consolas</family>
-                 <pointsize>12</pointsize>
-                </font>
-               </property>
-               <property name="text">
-                <string>-</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="lat_title">
+            <property name="font">
+             <font>
+              <family>Inter</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: #8f90a6;</string>
+            </property>
+            <property name="text">
+             <string>Latitude:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lat_value">
+            <property name="font">
+             <font>
+              <family>Consolas</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>-</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Preferred</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="lng_title">
+            <property name="font">
+             <font>
+              <family>Inter</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: #8f90a6;</string>
+            </property>
+            <property name="text">
+             <string>Longitude:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lng_value">
+            <property name="font">
+             <font>
+              <family>Consolas</family>
+              <pointsize>12</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>-</string>
+            </property>
            </widget>
           </item>
          </layout>
@@ -686,7 +686,7 @@ border-radius: 5px;
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
-           <widget class="QWidget" name="" native="true">
+           <widget class="QWidget" name="widget" native="true">
             <property name="maximumSize">
              <size>
               <width>16777215</width>
@@ -2125,33 +2125,12 @@ QMenu::separator {
     <property name="title">
      <string>Testing</string>
     </property>
-    <widget class="QMenu" name="menuPayload">
-     <property name="title">
-      <string>Break System</string>
-     </property>
-     <addaction name="actionRelease_Sequence"/>
-     <addaction name="actionRelease"/>
-     <addaction name="actionBreak"/>
-     <addaction name="actionHalt_Sequence"/>
-    </widget>
-    <widget class="QMenu" name="menuSet_Container_State">
-     <property name="title">
-      <string>Set Container State</string>
-     </property>
-     <addaction name="action1_PRELAUNCH"/>
-     <addaction name="action2_LAUNCH"/>
-     <addaction name="action3_PARADEPLOY"/>
-     <addaction name="action4_TPDEPLOY"/>
-     <addaction name="action5_RELEASED"/>
-    </widget>
     <addaction name="actionParachute"/>
     <addaction name="actionPoll"/>
     <addaction name="separator"/>
     <addaction name="actionReset_Camera_Rotation"/>
     <addaction name="actionCalibrate_Gimbal_IMU"/>
     <addaction name="separator"/>
-    <addaction name="menuPayload"/>
-    <addaction name="menuSet_Container_State"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
@@ -2165,11 +2144,31 @@ QMenu::separator {
      <string>MQTT</string>
     </property>
     <addaction name="actionEnable"/>
-    <addaction name="actionDisable"/>
+   </widget>
+   <widget class="QMenu" name="menuSet_State">
+    <property name="title">
+     <string>FSW State Overwrite</string>
+    </property>
+    <addaction name="action1_PRELAUNCH"/>
+    <addaction name="action2_LAUNCH"/>
+    <addaction name="action3_PARADEPLOY"/>
+    <addaction name="action4_TPDEPLOY"/>
+    <addaction name="action5_RELEASED"/>
+   </widget>
+   <widget class="QMenu" name="menuBreak_System">
+    <property name="title">
+     <string>Break System</string>
+    </property>
+    <addaction name="actionRelease_Sequence"/>
+    <addaction name="actionRelease"/>
+    <addaction name="actionBreak"/>
+    <addaction name="actionHalt_Sequence"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMQTT"/>
    <addaction name="menuTest"/>
+   <addaction name="menuBreak_System"/>
+   <addaction name="menuSet_State"/>
    <addaction name="menuWindow"/>
   </widget>
   <action name="actionSave">
@@ -2224,6 +2223,9 @@ QMenu::separator {
    </property>
   </action>
   <action name="actionEnable">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Enable</string>
    </property>
@@ -2258,6 +2260,16 @@ QMenu::separator {
     <string>Break</string>
    </property>
   </action>
+  <action name="actionCalibrate_Gimbal_IMU">
+   <property name="text">
+    <string>Calibrate Gimbal IMU</string>
+   </property>
+  </action>
+  <action name="actionHalt_Sequence">
+   <property name="text">
+    <string>Halt Sequence</string>
+   </property>
+  </action>
   <action name="action1_PRELAUNCH">
    <property name="text">
     <string>1 - PRELAUNCH</string>
@@ -2270,27 +2282,17 @@ QMenu::separator {
   </action>
   <action name="action3_PARADEPLOY">
    <property name="text">
-    <string>3 - PARADEPLOY  (also start polling payload)</string>
+    <string>3 - PARADEPLOY</string>
    </property>
   </action>
   <action name="action4_TPDEPLOY">
    <property name="text">
-    <string>4 - TPDEPLOY</string>
+    <string>4 - TPDEPLOY (also start polling payload)</string>
    </property>
   </action>
   <action name="action5_RELEASED">
    <property name="text">
     <string>5 - RELEASED</string>
-   </property>
-  </action>
-  <action name="actionCalibrate_Gimbal_IMU">
-   <property name="text">
-    <string>Calibrate Gimbal IMU</string>
-   </property>
-  </action>
-  <action name="actionHalt_Sequence">
-   <property name="text">
-    <string>Halt Sequence</string>
    </property>
   </action>
  </widget>

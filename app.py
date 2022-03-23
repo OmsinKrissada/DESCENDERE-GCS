@@ -42,17 +42,13 @@ class App(QMainWindow):
         self.map_initialized = False
 
         # Initilize MQTT
+        self.mqtt_enabled = False
         self.mqtt_client = mqtt.Client()
         self.mqtt_client.on_connect = lambda client, userdata, flags, rc: print(
             "Connected to MQTT broker with result code "+str(rc))
         self.mqtt_client.on_message = lambda client, userdata, msg: print(
             msg.topic+" "+str(msg.payload))
         self.mqtt_client.username_pw_set('1022', 'Teasgote783')
-        try:
-            self.mqtt_client.connect("cansat.info", 1883)
-        except Exception:
-            logger.warn('Cannot connect to MQTT broker')
-            self.ui.telemetry_log.append('❌ Cannot connect to MQTT broker')
 
         # Initialize charts
         graphs = [
@@ -197,6 +193,10 @@ class App(QMainWindow):
         self.ui.actionFull_Screen.triggered.connect(self.toggleFullScreen)
         self.ui.actionExit.triggered.connect(self.close)
 
+        # MQTT
+        self.ui.actionEnable.triggered.connect(
+            lambda checked: self.updateMQTT(checked))
+
         self.ui.port_value.currentTextChanged.connect(
             lambda text: self.selectPort(text))
         self.ui.port_refresh_button.pressed.connect(self.refreshPort)
@@ -207,6 +207,22 @@ class App(QMainWindow):
         self.ui.cmdSendButton_2.pressed.connect(self.sendControlCommand)
 
         self.ui.start_button.pressed.connect(self.init_lifecycle)
+
+    def updateMQTT(self, enable: bool):
+        if enable:
+            logger.info('Connecting to MQTT broker ...')
+            try:
+                self.mqtt_client.connect("cansat.info", 1883)
+                self.mqtt_enabled = True
+                logger.info('Connected to MQTT broker')
+                self.ui.telemetry_log.append('Connected to MQTT broker')
+            except Exception:
+                logger.warning('Cannot connect to MQTT broker')
+                self.ui.telemetry_log.append('❌ Cannot connect to MQTT broker')
+                self.ui.actionEnable.setChecked(False)
+        else:
+            self.mqtt_client.disconnect()
+            self.mqtt_enabled = False
 
     def handleTelemetry(self, data: str):
         # Display in log widget
@@ -220,7 +236,8 @@ class App(QMainWindow):
             logger.error('Received data is None')
             return
         pkg = data.split(',')
-        self.mqtt_client.publish('teams/1022', data)
+        if self.mqtt_enabled:
+            self.mqtt_client.publish('teams/1022', data)
 
         # Determine package origin
         if pkg[3] == 'C':
