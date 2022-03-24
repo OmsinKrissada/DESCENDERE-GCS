@@ -231,6 +231,8 @@ class App(QMainWindow):
                 self.ui.telemetry_log.append('❌ Cannot connect to MQTT broker')
                 self.ui.actionEnable.setChecked(False)
         else:
+            logger.info('Disconnected from MQTT broker')
+            self.ui.telemetry_log.append('Disconnected from MQTT broker')
             self.mqtt_client.disconnect()
             self.mqtt_enabled = False
 
@@ -330,6 +332,22 @@ class App(QMainWindow):
         self.c_lat_data = GPS_LATITUDE
         self.c_lng_data = GPS_LONGITUDE
         self.ui.c_state.setText(SOFTWARE_STATE)
+
+        # Update state progress bar
+        state_progress = 0
+        if SOFTWARE_STATE == 'PRELAUNCH':
+            state_progress = 1
+        elif SOFTWARE_STATE == 'LAUNCH':
+            state_progress = 2
+        elif SOFTWARE_STATE == 'PARADEPLOY':
+            state_progress = 3
+        elif SOFTWARE_STATE == 'TPDEPLOY':
+            state_progress = 4
+        elif SOFTWARE_STATE == 'RELEASE':
+            state_progress = 5
+        elif SOFTWARE_STATE == 'LAND':
+            state_progress = 6
+        self.ui.stage_bar.setValue(state_progress)
 
         # Update chart
         self.c_temp_chart.plot(self.c_pkg_data, self.c_temp_data)

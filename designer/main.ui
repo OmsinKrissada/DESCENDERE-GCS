@@ -947,7 +947,7 @@ background-color: white;</string>
                </property>
                <property name="font">
                 <font>
-                 <family>Inter</family>
+                 <family>Consolas</family>
                  <pointsize>12</pointsize>
                 </font>
                </property>
@@ -1012,7 +1012,7 @@ background-color: white;</string>
                </property>
                <property name="font">
                 <font>
-                 <family>Inter</family>
+                 <family>Consolas</family>
                  <pointsize>12</pointsize>
                 </font>
                </property>
@@ -1077,7 +1077,7 @@ background-color: white;</string>
                </property>
                <property name="font">
                 <font>
-                 <family>Inter</family>
+                 <family>Consolas</family>
                  <pointsize>12</pointsize>
                 </font>
                </property>
@@ -1142,7 +1142,7 @@ background-color: white;</string>
                </property>
                <property name="font">
                 <font>
-                 <family>Inter</family>
+                 <family>Consolas</family>
                  <pointsize>12</pointsize>
                 </font>
                </property>
@@ -2169,7 +2169,7 @@ background-color: white;</string>
                </property>
                <property name="font">
                 <font>
-                 <family>Inter</family>
+                 <family>Consolas</family>
                  <pointsize>12</pointsize>
                 </font>
                </property>
@@ -2234,7 +2234,7 @@ background-color: white;</string>
                </property>
                <property name="font">
                 <font>
-                 <family>Inter</family>
+                 <family>Consolas</family>
                  <pointsize>12</pointsize>
                 </font>
                </property>
@@ -2299,7 +2299,7 @@ background-color: white;</string>
                </property>
                <property name="font">
                 <font>
-                 <family>Inter</family>
+                 <family>Consolas</family>
                  <pointsize>12</pointsize>
                 </font>
                </property>
@@ -2460,7 +2460,7 @@ background-color: white;</string>
                </property>
                <property name="font">
                 <font>
-                 <family>Inter</family>
+                 <family>Consolas</family>
                  <pointsize>12</pointsize>
                 </font>
                </property>
@@ -2525,7 +2525,7 @@ background-color: white;</string>
                </property>
                <property name="font">
                 <font>
-                 <family>Inter</family>
+                 <family>Consolas</family>
                  <pointsize>12</pointsize>
                 </font>
                </property>
@@ -2590,7 +2590,7 @@ background-color: white;</string>
                </property>
                <property name="font">
                 <font>
-                 <family>Inter</family>
+                 <family>Consolas</family>
                  <pointsize>12</pointsize>
                 </font>
                </property>
@@ -2711,7 +2711,52 @@ border-radius: 5px;</string>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeType">
+             <enum>QSizePolicy::Preferred</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>47</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
            <widget class="QLabel" name="label_3">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>Inter</family>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>PRELAUNCH</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="font">
              <font>
               <family>Inter</family>
@@ -2723,29 +2768,34 @@ border-radius: 5px;</string>
              <string>LAUNCH</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_2">
-            <property name="font">
-             <font>
-              <family>Inter</family>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
             </property>
-            <property name="text">
-             <string>APOGEE</string>
+            <property name="sizeType">
+             <enum>QSizePolicy::Preferred</enum>
             </property>
-            <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>27</width>
+              <height>20</height>
+             </size>
             </property>
-           </widget>
+           </spacer>
           </item>
           <item>
            <widget class="QLabel" name="label_4">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="font">
              <font>
               <family>Inter</family>
@@ -2754,15 +2804,21 @@ border-radius: 5px;</string>
              </font>
             </property>
             <property name="text">
-             <string>FPD</string>
+             <string>PARADEPLOY</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QLabel" name="label_5">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="font">
              <font>
               <family>Inter</family>
@@ -2771,15 +2827,21 @@ border-radius: 5px;</string>
              </font>
             </property>
             <property name="text">
-             <string>SPD</string>
+             <string>TPDEPLOY</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QLabel" name="label_6">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="font">
              <font>
               <family>Inter</family>
@@ -2788,10 +2850,33 @@ border-radius: 5px;</string>
              </font>
             </property>
             <property name="text">
-             <string>PD</string>
+             <string>RELEASE</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_15">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>Inter</family>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>LAND</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
             </property>
            </widget>
           </item>
@@ -2802,6 +2887,7 @@ border-radius: 5px;</string>
         <widget class="QProgressBar" name="stage_bar">
          <property name="styleSheet">
           <string notr="true">QProgressBar {
+	margin: 0px 20px;
 	border-radius: 5px;
 	background-color: #555770;
 }
@@ -2812,10 +2898,19 @@ QProgressBar::chunk {
 	border: 2px solid #555770;
 }</string>
          </property>
+         <property name="minimum">
+          <number>0</number>
+         </property>
+         <property name="maximum">
+          <number>6</number>
+         </property>
          <property name="value">
           <number>0</number>
          </property>
          <property name="textVisible">
+          <bool>false</bool>
+         </property>
+         <property name="invertedAppearance">
           <bool>false</bool>
          </property>
         </widget>
