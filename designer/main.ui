@@ -2773,6 +2773,29 @@ border-radius: 5px;</string>
            </widget>
           </item>
           <item>
+           <widget class="QLabel" name="label_4">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <family>Inter</family>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string>APOGEE</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="horizontalSpacer_5">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -2782,14 +2805,14 @@ border-radius: 5px;</string>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>27</width>
+              <width>7</width>
               <height>20</height>
              </size>
             </property>
            </spacer>
           </item>
           <item>
-           <widget class="QLabel" name="label_4">
+           <widget class="QLabel" name="label_5">
             <property name="sizePolicy">
              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
               <horstretch>0</horstretch>
@@ -2812,29 +2835,6 @@ border-radius: 5px;</string>
            </widget>
           </item>
           <item>
-           <widget class="QLabel" name="label_5">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="font">
-             <font>
-              <family>Inter</family>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>TPDEPLOY</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QLabel" name="label_6">
             <property name="sizePolicy">
              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
@@ -2850,7 +2850,7 @@ border-radius: 5px;</string>
              </font>
             </property>
             <property name="text">
-             <string>RELEASE</string>
+             <string>TPDEPLOY</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -2993,9 +2993,13 @@ QMenu::separator {
     <addaction name="actionParachute"/>
     <addaction name="actionPoll"/>
     <addaction name="separator"/>
+    <addaction name="actionPayload_On"/>
+    <addaction name="actionPayload_Off"/>
     <addaction name="actionReset_Camera_Rotation"/>
     <addaction name="actionCalibrate_Gimbal_IMU"/>
     <addaction name="separator"/>
+    <addaction name="actionForce_Polling_Payload"/>
+    <addaction name="actionUnforce_Polling_Payload"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
@@ -3029,6 +3033,9 @@ QMenu::separator {
     <addaction name="actionRelease"/>
     <addaction name="actionBreak"/>
     <addaction name="actionHalt_Sequence"/>
+    <addaction name="separator"/>
+    <addaction name="actionSet_Mode_1_0_5s"/>
+    <addaction name="actionSet_Mode_2_0_55s"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMQTT"/>
@@ -3148,22 +3155,52 @@ QMenu::separator {
   </action>
   <action name="action2_PARADEPLOY">
    <property name="text">
-    <string>2 - PARADEPLOY</string>
+    <string>2 - APOGEE</string>
    </property>
   </action>
   <action name="action3_TPDEPLOY">
    <property name="text">
-    <string>3 - TPDEPLOY (also start polling payload)</string>
+    <string>3 - PARADEPLOY</string>
    </property>
   </action>
   <action name="action4_RELEASED">
    <property name="text">
-    <string>4 - RELEASED</string>
+    <string>4 - TPDEPLOY</string>
    </property>
   </action>
   <action name="action5_LAND">
    <property name="text">
     <string>5 - LAND</string>
+   </property>
+  </action>
+  <action name="actionForce_Polling_Payload">
+   <property name="text">
+    <string>Force Polling Payload</string>
+   </property>
+  </action>
+  <action name="actionUnforce_Polling_Payload">
+   <property name="text">
+    <string>Unforce Polling Payload</string>
+   </property>
+  </action>
+  <action name="actionSet_Mode_1_0_5s">
+   <property name="text">
+    <string>Set Mode 1 (0.5s)</string>
+   </property>
+  </action>
+  <action name="actionSet_Mode_2_0_55s">
+   <property name="text">
+    <string>Set Mode 2 (0.55s)</string>
+   </property>
+  </action>
+  <action name="actionPayload_On">
+   <property name="text">
+    <string>Payload On</string>
+   </property>
+  </action>
+  <action name="actionPayload_Off">
+   <property name="text">
+    <string>Payload Off</string>
    </property>
   </action>
  </widget>

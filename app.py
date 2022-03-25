@@ -12,14 +12,10 @@ import settings
 
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QFileDialog, QMainWindow
-from folium.folium import Map
-from folium import Marker, Icon
 import sys
-import io
 import time
 import pyqtgraph as pg
 import os
-import simplekml
 import paho.mqtt.client as mqtt
 
 
@@ -37,11 +33,11 @@ class App(QMainWindow):
         # Initialize map
         if (os.path.exists('data.kml')):
             i = 0
-            path = f'data_{i}.kml'
+            path = f'kml/data_{i}.kml'
             while(os.path.exists(path)):
                 i += 1
-                path = f'data_{i}.kml'
-            os.rename('data.kml', f'data_{i}.kml')
+                path = f'kml/data_{i}.kml'
+            os.rename('data.kml', f'kml/data_{i}.kml')
         self.map_initialized = False
 
         # Initilize MQTT
@@ -175,10 +171,18 @@ class App(QMainWindow):
             lambda: self.telemetry.sendCommand('FORCE', 'PARADEPLOY'))
         self.ui.actionPoll.triggered.connect(
             lambda: self.telemetry.sendCommand('FORCE', 'POLL'))
+        self.ui.actionPayload_On.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'TPON'))
+        self.ui.actionPayload_Off.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'TPOFF'))
         self.ui.actionReset_Camera_Rotation.triggered.connect(
             lambda: self.telemetry.sendCommand('FORCE', 'RESETCAM'))
         self.ui.actionCalibrate_Gimbal_IMU.triggered.connect(
             lambda: self.telemetry.sendCommand('FORCE', 'CALCAM'))
+        self.ui.actionForce_Polling_Payload.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'POLLON'))
+        self.ui.actionUnforce_Polling_Payload.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'POLLOFF'))
         self.ui.actionRelease_Sequence.triggered.connect(
             lambda: self.telemetry.sendCommand('FORCE', 'SEQUENCE'))
         self.ui.actionHalt_Sequence.triggered.connect(
@@ -187,6 +191,10 @@ class App(QMainWindow):
             lambda: self.telemetry.sendCommand('FORCE', 'RELEASE'))
         self.ui.actionBreak.triggered.connect(
             lambda: self.telemetry.sendCommand('FORCE', 'BREAK'))
+        self.ui.actionSet_Mode_1_0_5s.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'MODE1'))
+        self.ui.actionSet_Mode_2_0_55s.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'MODE2'))
         self.ui.action0_PRELAUNCH.triggered.connect(
             lambda: self.telemetry.sendCommand('FORCE', 'STATE0'))
         self.ui.action1_LAUNCH.triggered.connect(
@@ -222,7 +230,7 @@ class App(QMainWindow):
         if enable:
             logger.info('Connecting to MQTT broker ...')
             try:
-                self.mqtt_client.connect("cansat.info", 1883)
+                self.mqtt_client.connect("krissada.com", 1883)
                 self.mqtt_enabled = True
                 logger.info('Connected to MQTT broker')
                 self.ui.telemetry_log.append('Connected to MQTT broker')
@@ -339,11 +347,11 @@ class App(QMainWindow):
             state_progress = 1
         elif SOFTWARE_STATE == 'LAUNCH':
             state_progress = 2
-        elif SOFTWARE_STATE == 'PARADEPLOY':
+        elif SOFTWARE_STATE == 'APOGEE':
             state_progress = 3
-        elif SOFTWARE_STATE == 'TPDEPLOY':
+        elif SOFTWARE_STATE == 'PARADEPLOY':
             state_progress = 4
-        elif SOFTWARE_STATE == 'RELEASE':
+        elif SOFTWARE_STATE == 'TPDEPLOY':
             state_progress = 5
         elif SOFTWARE_STATE == 'LAND':
             state_progress = 6
@@ -468,15 +476,31 @@ class App(QMainWindow):
         # kml.save("Save.kml")
         self.coords += f'{coords[1]},{coords[0]},{self.c_gps_altitude_data[-1]}\n'
         with open('data.kml', 'w') as file:
-            file.writelines('<kml xmlns="http://www.opengis.net/kml/2.2" '
-                            'xmlns:gx="http://www.google.com/kml/ext/2.2">'
-                            '<Folder><name>Log</name><Placemark><name>SPOROS</name>'
-                            '<styleUrl>#yellowLineGreenPoly</styleUrl><Style>'
-                            '<LineStyle><color>ff00ffff</color><colorMode>normal</colorMode><width>4</width></LineStyle>'
-                            '</Style><LineString><extrude>1</extrude><altitudeMode>absolute</altitudeMode><coordinates>'+'\n')
+            file.writelines('''<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+	<Document>
+		<name>DESCENDERE Container</name>
+		<Placemark>
+			<name>Flight Track</name>
+			<Style>
+				<LineStyle>
+					<color>ff00ff00</color>
+					<colorMode>normal</colorMode>
+					<width>2</width>
+				</LineStyle>
+			</Style>
+			<LineString>
+				<extrude>1</extrude>
+				<tessellate>1</tessellate>
+				<altitudeMode>clampToGround</altitudeMode>
+				<coordinates>\n''')
             file.writelines(self.coords)
             file.writelines(
-                '\n' + '</coordinates></LineString></Placemark></Folder></kml>')
+                '\n' + '''</coordinates>
+			</LineString>
+		</Placemark>
+	</Document>
+</kml>''')
         # pass
         # self.ui.lat_value.setText(str(coords[0]))
         # self.ui.lng_value.setText(str(coords[1]))
