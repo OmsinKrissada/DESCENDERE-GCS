@@ -385,6 +385,8 @@ class App(QMainWindow):
         # else:
         #     self.ui.c_battery_visual.setStyle('background-color: #ff0000')
 
+        self.ui.c_apogee.setText(APOGEE)
+
         self.ui.last_cmd_value.setText(CMD_ECHO)
 
     def updatePayload(self):

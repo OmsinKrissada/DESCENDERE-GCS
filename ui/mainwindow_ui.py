@@ -1638,7 +1638,7 @@ class Ui_MainWindow(object):
         self.title.setText(_translate("MainWindow", "CONTAINER"))
         self.label_14.setText(_translate("MainWindow", "STATE:"))
         self.c_state.setText(_translate("MainWindow", "-"))
-        self.label_16.setText(_translate("MainWindow", "Current Apogee:"))
+        self.label_16.setText(_translate("MainWindow", "Expected Apogee:"))
         self.c_apogee.setText(_translate("MainWindow", "-"))
         self.container_battery_percent.setText(_translate("MainWindow", "N/A"))
         self.pkg_count_label_3.setText(_translate("MainWindow", "Healthy Packets:"))

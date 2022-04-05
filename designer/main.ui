@@ -605,7 +605,7 @@ border-radius: 100px;</string>
                 </font>
                </property>
                <property name="text">
-                <string>Current Apogee:</string>
+                <string>Expected Apogee:</string>
                </property>
               </widget>
              </item>
