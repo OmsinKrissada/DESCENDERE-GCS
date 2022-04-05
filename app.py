@@ -277,13 +277,13 @@ class App(QMainWindow):
         command = self.ui.cmd_select_box.currentText()
         if hasattr(self, 'settime_preview_timer'):
             self.settime_preview_timer.stop()
-        if command == 'Power ON':
+        elif command == 'Power ON':
             self.ui.cmd_preview.setText(
                 TelemetryHandler.previewSendCommand('CX', 'ON'))
-        if command == 'Power OFF':
+        elif command == 'Power OFF':
             self.ui.cmd_preview.setText(
                 TelemetryHandler.previewSendCommand('CX', 'OFF'))
-        if command == 'Set Time':
+        elif command == 'Set Time':
             self.ui.cmd_preview.setText(
                 TelemetryHandler.previewSendCommand('ST', datetime.utcnow().strftime('%H:%M:%S')))
             self.settime_preview_timer = QTimer()
@@ -291,16 +291,19 @@ class App(QMainWindow):
                 TelemetryHandler.previewSendCommand('ST', datetime.utcnow().strftime('%H:%M:%S'))))
             self.settime_preview_timer.start(1000)
 
-        if command == 'SIM Enable':
+        elif command == 'SIM Enable':
             self.ui.cmd_preview.setText(
                 TelemetryHandler.previewSendCommand('SIM', 'ENABLE'))
-        if command == 'SIM Activate':
+        elif command == 'SIM Activate':
             self.ui.cmd_preview.setText(
                 TelemetryHandler.previewSendCommand('SIM', 'ACTIVATE'))
             self.startSim()
-        if command == 'SIM Disable':
+        elif command == 'SIM Disable':
             self.ui.cmd_preview.setText(
                 TelemetryHandler.previewSendCommand('SIM', 'DISABLE'))
+        elif command == 'Set Apogee':
+            self.ui.cmd_preview.setText(
+                TelemetryHandler.previewSendCommand('SETPEAK', '10'))
 
     def sendControlCommand(self):
         if not hasattr(self, 'telemetry') or self.telemetry is None:
@@ -315,7 +318,7 @@ class App(QMainWindow):
     def updateContainer(self):
         # Destructuring telemetry data
         try:
-            TEAM_ID, MISSION_TIME, PACKET_COUNT, PACKET_TYPE, MODE, TP_RELEASED, ALTITUDE, TEMP, VOLTAGE, GPS_TIME, GPS_LATITUDE, GPS_LONGITUDE, GPS_ALTITUDE, GPS_SATS, SOFTWARE_STATE, CMD_ECHO = self.latest_container_telemetry
+            TEAM_ID, MISSION_TIME, PACKET_COUNT, PACKET_TYPE, MODE, TP_RELEASED, ALTITUDE, TEMP, VOLTAGE, GPS_TIME, GPS_LATITUDE, GPS_LONGITUDE, GPS_ALTITUDE, GPS_SATS, SOFTWARE_STATE, CMD_ECHO, APOGEE = self.latest_container_telemetry
             self.container_healthy_pkg += 1
             self.ui.c_healthy_pkg_count.setText(
                 str(self.container_healthy_pkg))
@@ -375,6 +378,12 @@ class App(QMainWindow):
         self.ui.container_battery_percent.setText(
             f'{bat_percent.__round__(2)}%')
         self.ui.c_battery_visual.setValue(int(bat_percent))
+        # if(bat_percent>70):
+        #     self.ui.c_battery_visual.setStyle('background-color: #39d98a')
+        # elif(bat_percent>40):
+        #     self.ui.c_battery_visual.setStyle('background-color: #ffff00')
+        # else:
+        #     self.ui.c_battery_visual.setStyle('background-color: #ff0000')
 
         self.ui.last_cmd_value.setText(CMD_ECHO)
 
@@ -436,7 +445,13 @@ class App(QMainWindow):
     #         data.pop(0)
 
     def batteryPercentage(self, voltage: float):
-        return ((voltage-5.2)/3.2)*100
+        min_charge = 5.2
+        max_charge = 8.3
+        percent = ((voltage-min_charge)/(max_charge-min_charge)) * 100
+        if percent > 100:
+            return 100
+        else:
+            return percent
 
     def startSim(self):
         if hasattr(self, 'sim_thread'):

@@ -31,11 +31,11 @@ class RTC:
         minute = delta // 60
         minute = minute % 60
         hour = minute // 60
-        time_list = [str(round(hour)), str(round(minute)),
-                     str(round(second)), microsecond]
+        time_list = [str(round(hour)).zfill(2), str(round(minute)).zfill(2),
+                     str(round(second)).zfill(2)]
         timestp = ' '.join(
             time_list) if second % 2 == 0 else ':'.join(time_list)
-        return timestp
+        return timestp + '.' + microsecond
 
     def seconds_elapsed(self):
         '''
