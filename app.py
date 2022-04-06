@@ -207,6 +207,8 @@ class App(QMainWindow):
             lambda: self.telemetry.sendCommand('FORCE', 'STATE4'))
         self.ui.action5_LAND.triggered.connect(
             lambda: self.telemetry.sendCommand('FORCE', 'STATE5'))
+        self.ui.actionToggle_Container_Camera.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'CCAM'))
 
         self.ui.actionFull_Screen.triggered.connect(self.toggleFullScreen)
         self.ui.actionExit.triggered.connect(self.close)

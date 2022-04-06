@@ -3026,6 +3026,7 @@ QMenu::separator {
     </property>
     <addaction name="actionParachute"/>
     <addaction name="actionPoll"/>
+    <addaction name="actionToggle_Container_Camera"/>
     <addaction name="separator"/>
     <addaction name="actionPayload_On"/>
     <addaction name="actionPayload_Off"/>
@@ -3235,6 +3236,11 @@ QMenu::separator {
   <action name="actionPayload_Off">
    <property name="text">
     <string>Payload Off</string>
+   </property>
+  </action>
+  <action name="actionToggle_Container_Camera">
+   <property name="text">
+    <string>Toggle Container Camera</string>
    </property>
   </action>
  </widget>

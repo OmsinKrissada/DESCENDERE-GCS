@@ -1580,10 +1580,13 @@ class Ui_MainWindow(object):
         self.actionPayload_On.setObjectName("actionPayload_On")
         self.actionPayload_Off = QtWidgets.QAction(MainWindow)
         self.actionPayload_Off.setObjectName("actionPayload_Off")
+        self.actionToggle_Container_Camera = QtWidgets.QAction(MainWindow)
+        self.actionToggle_Container_Camera.setObjectName("actionToggle_Container_Camera")
         self.menuFile.addAction(self.actionSave)
         self.menuFile.addAction(self.actionOpen_simulation_file)
         self.menuTest.addAction(self.actionParachute)
         self.menuTest.addAction(self.actionPoll)
+        self.menuTest.addAction(self.actionToggle_Container_Camera)
         self.menuTest.addSeparator()
         self.menuTest.addAction(self.actionPayload_On)
         self.menuTest.addAction(self.actionPayload_Off)
@@ -1744,6 +1747,7 @@ class Ui_MainWindow(object):
         self.actionSet_Mode_2_0_55s.setText(_translate("MainWindow", "Set Mode 2 (0.55s)"))
         self.actionPayload_On.setText(_translate("MainWindow", "Payload On"))
         self.actionPayload_Off.setText(_translate("MainWindow", "Payload Off"))
+        self.actionToggle_Container_Camera.setText(_translate("MainWindow", "Toggle Container Camera"))
 from pyqtgraph import PlotWidget
 import resources_rc
 
