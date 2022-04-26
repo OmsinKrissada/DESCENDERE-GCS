@@ -1,3 +1,4 @@
+from time import sleep
 from port import Port
 from settings import TEAM_ID
 from logger import logger
@@ -19,7 +20,9 @@ class TelemetryHandler:
         self.sendRawCommand(f'CMD,{TEAM_ID},{command},{data}\r')
 
     def sendRawCommand(self, text: str):
-        self.port.write(text)
+        for i in range(2):
+            self.port.write(text)
+            sleep(0.1)
         logger.info(f'Outgoing telemetry: {text}')
 
     @staticmethod

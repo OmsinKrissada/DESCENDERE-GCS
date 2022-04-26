@@ -2601,7 +2601,7 @@ background-color: white;</string>
                 </font>
                </property>
                <property name="text">
-                <string>Magnetometor</string>
+                <string>Magnetometor:</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>

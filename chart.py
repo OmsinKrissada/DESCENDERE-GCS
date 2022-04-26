@@ -31,18 +31,18 @@ class Chart:
                     f'{y[0][-1]}, {y[1][-1]}, {y[2][-1]} {self.unit}')
             except Exception as e:
                 print(f'Error setting chart text display: {e}')
-            self.chart.plot(**{'x': x[-30:-1], 'y': y[0][-30:-1],
+            self.chart.plot(**{'x': x[-50:-1], 'y': y[0][-50:-1],
                                'symbol': 'o', 'symbolSize': 6, 'symbolPen': 'r', 'pen': 'r'})
-            self.chart.plot(**{'x': x[-30:-1], 'y': y[1][-30:-1],
+            self.chart.plot(**{'x': x[-50:-1], 'y': y[1][-50:-1],
                                'symbol': 'o', 'symbolSize': 6, 'symbolPen': 'g', 'pen': 'g'})
-            self.chart.plot(**{'x': x[-30:-1], 'y': y[2][-30:-1],
+            self.chart.plot(**{'x': x[-50:-1], 'y': y[2][-50:-1],
                                'symbol': 'o', 'symbolSize': 6, 'symbolPen': 'c', 'pen': 'c'})
         else:
             try:
                 self.display.setText(f'{y[-1]} {self.unit}')
             except Exception as e:
                 print(f'Error setting chart text display: {e}')
-            self.chart.plot(**{'x': x[-30:-1], 'y': y[-30:-1],
+            self.chart.plot(**{'x': x[-50:-1], 'y': y[-50:-1],
                                'symbol': 'o', 'symbolSize': 6})
         return
         plottingThread = PlottingThread(

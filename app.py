@@ -320,7 +320,7 @@ class App(QMainWindow):
     def updateContainer(self):
         # Destructuring telemetry data
         try:
-            TEAM_ID, MISSION_TIME, PACKET_COUNT, PACKET_TYPE, MODE, TP_RELEASED, ALTITUDE, TEMP, VOLTAGE, GPS_TIME, GPS_LATITUDE, GPS_LONGITUDE, GPS_ALTITUDE, GPS_SATS, SOFTWARE_STATE, CMD_ECHO, APOGEE = self.latest_container_telemetry
+            TEAM_ID, MISSION_TIME, PACKET_COUNT, PACKET_TYPE, MODE, TP_RELEASED, ALTITUDE, TEMP, VOLTAGE, GPS_TIME, GPS_LATITUDE, GPS_LONGITUDE, GPS_ALTITUDE, GPS_SATS, SOFTWARE_STATE, CMD_ECHO = self.latest_container_telemetry
             self.container_healthy_pkg += 1
             self.ui.c_healthy_pkg_count.setText(
                 str(self.container_healthy_pkg))
@@ -387,7 +387,7 @@ class App(QMainWindow):
         # else:
         #     self.ui.c_battery_visual.setStyle('background-color: #ff0000')
 
-        self.ui.c_apogee.setText(APOGEE)
+        # self.ui.c_apogee.setText(PRESSURE)
 
         self.ui.last_cmd_value.setText(CMD_ECHO)
 

@@ -1700,7 +1700,7 @@ class Ui_MainWindow(object):
         self.p_ptr_err_value.setText(_translate("MainWindow", "N/A"))
         self.p_voltage_label.setText(_translate("MainWindow", "Voltage:"))
         self.p_voltage_value.setText(_translate("MainWindow", "N/A"))
-        self.p_mag_label.setText(_translate("MainWindow", "Magnetometor"))
+        self.p_mag_label.setText(_translate("MainWindow", "Magnetometor:"))
         self.p_mag_value.setText(_translate("MainWindow", "N/A"))
         self.elapsed_time.setText(_translate("MainWindow", "T + HH:MM:SS.ms"))
         self.start_button.setText(_translate("MainWindow", "START"))
