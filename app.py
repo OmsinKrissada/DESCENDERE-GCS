@@ -411,8 +411,8 @@ class App(QMainWindow):
         # Update data
         self.p_pkg_data.append(
             self.payload_healthy_pkg if settings.PACKET_COUNT_ORIGIN == 'local' else int(PACKET_COUNT))
-        self.p_temp_data.append(float(TP_TEMP))
-        self.p_altitude_data.append(float(TP_ALTITUDE))
+        self.p_temp_data.append(float(TP_TEMP or -1))
+        self.p_altitude_data.append(float(TP_ALTITUDE or -1))
         self.p_gyro_r_data.append(float(GYRO_R))
         self.p_gyro_p_data.append(float(GYRO_P))
         self.p_gyro_y_data.append(float(GYRO_Y))
