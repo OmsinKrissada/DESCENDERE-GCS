@@ -49,6 +49,10 @@ class Chart:
             self.chart, self.display, x, y, self.unit)
         plottingThread.start()
 
+    def clear(self):
+        self.chart.clear()
+        self.display.setText('N/A')
+
 
 class PlottingThread(QThread):
     def __init__(self, chart: PlotWidget, display: QLabel, x: list, y: list, unit: str):

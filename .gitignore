@@ -133,3 +133,4 @@ dmypy.json
 Flight*.csv
 data*.kml
 start.bat
+payload sd

@@ -71,35 +71,7 @@ class App(QMainWindow):
         self.p_voltage_chart = Chart(
             self.ui.p_voltage_chart, self.ui.p_voltage_value, 'V')
 
-        # Initialize chart data
-        self.container_healthy_pkg = 0
-        self.container_corrupted_pkg = 0
-        self.payload_healthy_pkg = 0
-        self.payload_corrupted_pkg = 0
-
-        self.c_pkg_data = []
-        self.p_pkg_data = []
-
-        self.c_temp_data = []
-        self.c_altitude_data = []
-        self.c_gps_altitude_data = []
-        self.c_voltage_data = []
-        self.c_lat_data = []
-        self.c_lng_data = []
-        self.p_temp_data = []
-        self.p_altitude_data = []
-        self.p_gyro_r_data = []
-        self.p_gyro_p_data = []
-        self.p_gyro_y_data = []
-        self.p_accel_r_data = []
-        self.p_accel_p_data = []
-        self.p_accel_y_data = []
-        self.p_mag_r_data = []
-        self.p_mag_p_data = []
-        self.p_mag_y_data = []
-        self.p_ptr_err_data = []
-        self.p_voltage_data = []
-        self.coords = []
+        self.reset()
 
         # Display available ports, if at least one available, initiate TelemetryHandler first in the list
         available_ports = Port.list()
@@ -227,6 +199,64 @@ class App(QMainWindow):
         self.ui.cmdSendButton_2.pressed.connect(self.sendControlCommand)
 
         self.ui.start_button.pressed.connect(self.init_lifecycle)
+        self.ui.reset_button.pressed.connect(self.reset)
+
+    def reset(self):
+        self.container_healthy_pkg = 0
+        self.container_corrupted_pkg = 0
+        self.payload_healthy_pkg = 0
+        self.payload_corrupted_pkg = 0
+
+        self.c_pkg_data = []
+        self.p_pkg_data = []
+
+        self.c_temp_data = []
+        self.c_altitude_data = []
+        self.c_gps_altitude_data = []
+        self.c_voltage_data = []
+        self.c_lat_data = []
+        self.c_lng_data = []
+        self.p_temp_data = []
+        self.p_altitude_data = []
+        self.p_gyro_r_data = []
+        self.p_gyro_p_data = []
+        self.p_gyro_y_data = []
+        self.p_accel_r_data = []
+        self.p_accel_p_data = []
+        self.p_accel_y_data = []
+        self.p_mag_r_data = []
+        self.p_mag_p_data = []
+        self.p_mag_y_data = []
+        self.p_ptr_err_data = []
+        self.p_voltage_data = []
+        self.coords = []
+        self.c_temp_chart.clear()
+        self.c_altitude_chart.clear()
+        self.c_gps_altitude_chart.clear()
+        self.c_voltage_chart.clear()
+        self.p_temp_chart.clear()
+        self.p_gyro_chart.clear()
+        self.p_accel_chart.clear()
+        self.p_mag_chart.clear()
+        self.p_ptr_err_chart.clear()
+        self.p_voltage_chart.clear()
+
+        self.ui.total_pkg_value.setText('0')
+        self.ui.total_corrupted_pkg_value.setText('0')
+        self.ui.c_healthy_pkg_count.setText('0')
+        self.ui.c_corrupted_pkg_count.setText('0')
+        self.ui.p_healthy_pkg_count.setText('0')
+        self.ui.p_corrupted_pkg_count.setText('0')
+        self.ui.last_cmd_value.setText('-')
+        self.ui.telemetry_log.clear()
+        self.ui.telemetry_log.clearHistory()
+        self.ui.c_battery_visual.setValue(0)
+        self.ui.container_battery_percent.setText('N/A')
+        self.ui.p_battery_visual.setValue(0)
+        self.ui.payload_battery_percent.setText('N/A')
+        self.ui.lat_value.setText('-')
+        self.ui.lng_value.setText('-')
+        self.ui.sats_value.setText('0')
 
     def updateMQTT(self, enable: bool):
         if enable:
