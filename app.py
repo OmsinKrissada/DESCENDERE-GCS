@@ -312,9 +312,10 @@ class App(QMainWindow):
 
     def updateCmdPreview(self):
         command = self.ui.cmd_select_box.currentText()
+        self.ui.telemetry_log.append(command)
         if hasattr(self, 'settime_preview_timer'):
             self.settime_preview_timer.stop()
-        elif command == 'Power ON':
+        if command == 'Power ON':
             self.ui.cmd_preview.setText(
                 TelemetryHandler.previewSendCommand('CX', 'ON'))
         elif command == 'Power OFF':
