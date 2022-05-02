@@ -622,6 +622,38 @@ border-radius: 100px;</string>
               </widget>
              </item>
              <item>
+              <widget class="QLabel" name="label_16">
+               <property name="maximumSize">
+                <size>
+                 <width>168</width>
+                 <height>16777215</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Inter</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Teensy Temperature:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="c_teensy_temp">
+               <property name="font">
+                <font>
+                 <family>Consolas</family>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>-</string>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="QLabel" name="container_battery_percent">
                <property name="font">
                 <font>
@@ -3034,6 +3066,8 @@ QMenu::separator {
     <addaction name="separator"/>
     <addaction name="actionForce_Polling_Payload"/>
     <addaction name="actionUnforce_Polling_Payload"/>
+    <addaction name="separator"/>
+    <addaction name="actionToggle_Custom_Packet"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
@@ -3240,6 +3274,11 @@ QMenu::separator {
   <action name="actionToggle_Container_Camera">
    <property name="text">
     <string>Toggle Container Camera</string>
+   </property>
+  </action>
+  <action name="actionToggle_Custom_Packet">
+   <property name="text">
+    <string>Toggle Custom Packet</string>
    </property>
   </action>
  </widget>

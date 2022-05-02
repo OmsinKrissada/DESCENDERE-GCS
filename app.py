@@ -181,6 +181,8 @@ class App(QMainWindow):
             lambda: self.telemetry.sendCommand('FORCE', 'STATE5'))
         self.ui.actionToggle_Container_Camera.triggered.connect(
             lambda: self.telemetry.sendCommand('FORCE', 'CCAM'))
+        self.ui.actionToggle_Custom_Packet.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'SENDCUSTOM'))
 
         self.ui.actionFull_Screen.triggered.connect(self.toggleFullScreen)
         self.ui.actionExit.triggered.connect(self.close)
@@ -304,6 +306,9 @@ class App(QMainWindow):
                 f.write(data+'\n')
             self.latest_payload_telemetry = pkg[:]
             self.updatePayload()
+        elif pkg[3] == 'X':
+            TEAM_ID, MISSION_TIME, PACKET_COUNT, PACKET_TYPE, INTERNAL_TEMP = pkg
+            self.ui.c_teensy_temp = f'{INTERNAL_TEMP} °C'
 
     def updateCmdPreview(self):
         command = self.ui.cmd_select_box.currentText()
