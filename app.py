@@ -307,8 +307,9 @@ class App(QMainWindow):
             self.latest_payload_telemetry = pkg[:]
             self.updatePayload()
         elif pkg[3] == 'X':
-            TEAM_ID, MISSION_TIME, PACKET_COUNT, PACKET_TYPE, INTERNAL_TEMP = pkg
-            self.ui.c_teensy_temp = f'{INTERNAL_TEMP} °C'
+            TEAM_ID, MISSION_TIME, PACKET_COUNT, PACKET_TYPE, CONTAINER_INNER_TEMP = pkg
+            self.ui.c_teensy_temp.setText(
+                f'{CONTAINER_INNER_TEMP} °C')
 
     def updateCmdPreview(self):
         command = self.ui.cmd_select_box.currentText()
@@ -430,7 +431,7 @@ class App(QMainWindow):
     def updatePayload(self):
         # Destructuring telemetry data
         try:
-            TEAM_ID, MISSION_TIME, PACKET_COUNT, PACKET_TYPE, TP_ALTITUDE, TP_TEMP, TP_VOLTAGE, GYRO_R, GYRO_P, GYRO_Y, ACCEL_R, ACCEL_P, ACCEL_Y, MAG_R, MAG_P, MAG_Y, POINTING_ERROR, TP_SOFTWARE_STATE = self.latest_payload_telemetry
+            TEAM_ID, MISSION_TIME, PACKET_COUNT, PACKET_TYPE, TP_ALTITUDE, TP_TEMP, TP_VOLTAGE, GYRO_R, GYRO_P, GYRO_Y, ACCEL_R, ACCEL_P, ACCEL_Y, MAG_R, MAG_P, MAG_Y, POINTING_ERROR, TP_SOFTWARE_STATE, INTERNAL_TEMP = self.latest_payload_telemetry
             self.payload_healthy_pkg += 1
             self.ui.p_healthy_pkg_count.setText(
                 str(self.payload_healthy_pkg))
@@ -478,6 +479,8 @@ class App(QMainWindow):
         self.ui.payload_battery_percent.setText(
             f'{bat_percent.__round__(2)}%')
         self.ui.p_battery_visual.setValue(int(bat_percent))
+
+        self.ui.p_teensy_temp.setText(f'{INTERNAL_TEMP} °C')
 
     # def appendData(self, data: list, new_data):
     #     data.append(new_data)

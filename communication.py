@@ -22,7 +22,7 @@ class TelemetryHandler:
     def sendRawCommand(self, text: str):
         for i in range(2):
             self.port.write(text)
-            sleep(0.1)
+        # sleep(0.1)
         logger.info(f'Outgoing telemetry: {text}')
 
     @staticmethod

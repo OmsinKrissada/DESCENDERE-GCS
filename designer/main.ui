@@ -625,7 +625,7 @@ border-radius: 100px;</string>
               <widget class="QLabel" name="label_16">
                <property name="maximumSize">
                 <size>
-                 <width>168</width>
+                 <width>220</width>
                  <height>16777215</height>
                 </size>
                </property>
@@ -636,12 +636,25 @@ border-radius: 100px;</string>
                 </font>
                </property>
                <property name="text">
-                <string>Teensy Temperature:</string>
+                <string>Teensy Temperature (C,TP):</string>
                </property>
               </widget>
              </item>
              <item>
               <widget class="QLabel" name="c_teensy_temp">
+               <property name="font">
+                <font>
+                 <family>Consolas</family>
+                 <pointsize>11</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>-</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="p_teensy_temp">
                <property name="font">
                 <font>
                  <family>Consolas</family>
