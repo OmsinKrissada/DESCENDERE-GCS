@@ -29,8 +29,8 @@ class RTC:
         second = round(delta % 60)
         microsecond = str(datetime.now().time().microsecond)[:2]
         minute = delta // 60
-        minute = minute % 60
         hour = minute // 60
+        minute = minute % 60
         time_list = [str(round(hour)).zfill(2), str(round(minute)).zfill(2),
                      str(round(second)).zfill(2)]
         timestp = ' '.join(
