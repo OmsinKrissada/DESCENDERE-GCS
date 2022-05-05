@@ -282,7 +282,7 @@ class App(QMainWindow):
         # Display in log widget
         if(not data or data == '\r' or data == '\n'):
             return
-        self.ui.telemetry_log.append(f'📩 {data}')
+        # self.ui.telemetry_log.append(f'📩 {data}')
         if self.ui.autoscroll_check.isChecked():
             scrollbar = self.ui.telemetry_log.verticalScrollBar()
             scrollbar.setValue(scrollbar.maximum())
@@ -295,18 +295,21 @@ class App(QMainWindow):
 
         # Determine package origin
         if pkg[3] == 'C':
+            self.ui.telemetry_log.append(f'📩 {data}')
             # logger.info(f'[CANSAT] :{data}')
             with open('Flight_1022_C_with_corrupted.csv', 'a') as f:
                 f.write(data+'\n')
             self.latest_container_telemetry = pkg[:]
             self.updateContainer()
         elif pkg[3] == 'T':
+            self.ui.telemetry_log.append(f'📩 {",".join(pkg[0:-1])}')
             # logger.info(f'[PAYLOAD]: {data}')
             with open('Flight_1022_T_with_corrupted.csv', 'a') as f:
                 f.write(data+'\n')
             self.latest_payload_telemetry = pkg[:]
             self.updatePayload()
         elif pkg[3] == 'X':
+            # self.ui.telemetry_log.append(f'📩 {data}')
             TEAM_ID, MISSION_TIME, PACKET_COUNT, PACKET_TYPE, CONTAINER_INNER_TEMP = pkg
             self.ui.c_teensy_temp.setText(
                 f'{CONTAINER_INNER_TEMP} °C')
