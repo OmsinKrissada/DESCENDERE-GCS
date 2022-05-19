@@ -1,5 +1,5 @@
 <RCC>
   <qresource prefix="logo">
-    <file>assets/descendere_logo_resized.png</file>
+    <file>../assets/descendere_logo_resized.png</file>
   </qresource>
 </RCC>

@@ -133,6 +133,5 @@ dmypy.json
 Flight*.csv
 data*.kml
 start.bat
-payload sd
-termal*
-before termal2
+logs
+log backups

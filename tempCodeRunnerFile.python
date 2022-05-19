@@ -1,9 +1,0 @@
-import math
-
-def run_a_function(func:function, *args):
-    func()
-
-def print_hello():
-    print("Hello")
-
-print_hello()

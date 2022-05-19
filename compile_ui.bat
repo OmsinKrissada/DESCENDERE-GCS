@@ -1,2 +1,2 @@
-pyrcc5 resources.qrc -o ui/resources_rc.py
-pyuic5 -x designer/main.ui -o ui/mainwindow_ui.py
+venv\Scripts\pyside6-rcc designer\resources.qrc -o ui\resources_rc.py
+venv\Scripts\pyside6-uic designer\main.ui > ui\mainwindow_ui.py

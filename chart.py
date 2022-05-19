@@ -1,7 +1,7 @@
 from pyqtgraph import PlotWidget
-from PyQt5.QtWidgets import QLabel
-from PyQt5.QtCore import QThread
-from PyQt5.QtGui import QFont
+from PySide6.QtWidgets import QLabel
+from PySide6.QtCore import QThread
+from PySide6.QtGui import QFont
 from typing import Union
 
 from logger import logger

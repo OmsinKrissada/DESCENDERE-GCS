@@ -1,5 +1,5 @@
-from PyQt5 import QtCore
-from PyQt5.QtCore import QThread, QTimer
+from PySide6 import QtCore
+from PySide6.QtCore import QThread, QTimer
 from port import DisconnectException
 from datetime import datetime
 
@@ -10,8 +10,8 @@ from chart import Chart
 from rtc import RTC
 import settings
 
-from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QFileDialog, QMainWindow
+from PySide6 import QtWidgets
+from PySide6.QtWidgets import QFileDialog, QMainWindow
 import sys
 import time
 import pyqtgraph as pg
@@ -31,7 +31,9 @@ class App(QMainWindow):
         # self.showMaximized()
 
         # Initialize map
-        if (os.path.exists('data.kml')):
+        if not os.path.exists('kml'):
+            os.mkdir('kml')
+        if os.path.exists('data.kml'):
             i = 0
             path = f'kml/data_{i}.kml'
             while(os.path.exists(path)):
@@ -39,6 +41,26 @@ class App(QMainWindow):
                 path = f'kml/data_{i}.kml'
             os.rename('data.kml', f'kml/data_{i}.kml')
         self.map_initialized = False
+
+        # Move old logs
+        if not os.path.exists('logs'):
+            os.mkdir('logs')
+        log_file_names = ['Flight_1022_C.csv', 'Flight_1022_C_with_corrupted.csv',
+                          'Flight_1022_T.csv', 'Flight_1022_T_with_corrupted.csv']
+        for filename in log_file_names:
+            if os.path.exists(filename):
+                if sys.platform.startswith('win'):
+                    creation_time = datetime.fromtimestamp(os.path.getctime(
+                        filename))
+                else:
+                    try:
+                        creation_time = datetime.fromtimestamp(
+                            os.stat(filename).st_birthtime)
+                    except AttributeError:
+                        creation_time = datetime.fromtimestamp(
+                            os.stat(filename).st_mtime)
+                os.rename(
+                    filename, f'logs/{creation_time.strftime("%Y-%m-%dT%H_%M_%S")}_{filename}')
 
         # Initilize MQTT
         self.mqtt_enabled = False
@@ -243,6 +265,9 @@ class App(QMainWindow):
         self.p_ptr_err_chart.clear()
         self.p_voltage_chart.clear()
 
+        self.ui.c_state.setText('-')
+        self.ui.p_state.setText('-')
+
         self.ui.total_pkg_value.setText('0')
         self.ui.total_corrupted_pkg_value.setText('0')
         self.ui.c_healthy_pkg_count.setText('0')
@@ -302,17 +327,13 @@ class App(QMainWindow):
             self.latest_container_telemetry = pkg[:]
             self.updateContainer()
         elif pkg[3] == 'T':
-            self.ui.telemetry_log.append(f'📩 {",".join(pkg[0:-1])}')
+            # PLS REMOVE THIS AFTERWARDS, THANKS :)
+            self.ui.telemetry_log.append(f'📩 {data}')
             # logger.info(f'[PAYLOAD]: {data}')
             with open('Flight_1022_T_with_corrupted.csv', 'a') as f:
                 f.write(data+'\n')
             self.latest_payload_telemetry = pkg[:]
             self.updatePayload()
-        elif pkg[3] == 'X':
-            # self.ui.telemetry_log.append(f'📩 {data}')
-            TEAM_ID, MISSION_TIME, PACKET_COUNT, PACKET_TYPE, CONTAINER_INNER_TEMP = pkg
-            self.ui.c_teensy_temp.setText(
-                f'{CONTAINER_INNER_TEMP} °C')
 
     def updateCmdPreview(self):
         command = self.ui.cmd_select_box.currentText()
@@ -434,7 +455,7 @@ class App(QMainWindow):
     def updatePayload(self):
         # Destructuring telemetry data
         try:
-            TEAM_ID, MISSION_TIME, PACKET_COUNT, PACKET_TYPE, TP_ALTITUDE, TP_TEMP, TP_VOLTAGE, GYRO_R, GYRO_P, GYRO_Y, ACCEL_R, ACCEL_P, ACCEL_Y, MAG_R, MAG_P, MAG_Y, POINTING_ERROR, TP_SOFTWARE_STATE, INTERNAL_TEMP = self.latest_payload_telemetry
+            TEAM_ID, MISSION_TIME, PACKET_COUNT, PACKET_TYPE, TP_ALTITUDE, TP_TEMP, TP_VOLTAGE, GYRO_R, GYRO_P, GYRO_Y, ACCEL_R, ACCEL_P, ACCEL_Y, MAG_R, MAG_P, MAG_Y, POINTING_ERROR, TP_SOFTWARE_STATE = self.latest_payload_telemetry
             self.payload_healthy_pkg += 1
             self.ui.p_healthy_pkg_count.setText(
                 str(self.payload_healthy_pkg))
@@ -482,8 +503,6 @@ class App(QMainWindow):
         self.ui.payload_battery_percent.setText(
             f'{bat_percent.__round__(2)}%')
         self.ui.p_battery_visual.setValue(int(bat_percent))
-
-        self.ui.p_teensy_temp.setText(f'{INTERNAL_TEMP} °C')
 
     # def appendData(self, data: list, new_data):
     #     data.append(new_data)
@@ -535,7 +554,9 @@ class App(QMainWindow):
         # kml = simplekml.Kml()
         # kml.newpoint(coords=self.coords)
         # kml.save("Save.kml")
-        self.coords += f'{coords[1]},{coords[0]},{self.c_gps_altitude_data[-1]}\n'
+        if coords[1] != 0 and coords[0] != 0:
+            self.coords += f'{coords[1]},{coords[0]},{self.c_gps_altitude_data[-1]}\n'
+
         with open('data.kml', 'w') as file:
             file.writelines('''<?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
@@ -553,7 +574,7 @@ class App(QMainWindow):
 			<LineString>
 				<extrude>1</extrude>
 				<tessellate>1</tessellate>
-				<altitudeMode>clampToGround</altitudeMode>
+				<altitudeMode>absolute</altitudeMode>
 				<coordinates>\n''')
             file.writelines(self.coords)
             file.writelines(
@@ -591,7 +612,7 @@ class App(QMainWindow):
 class LifecycleThread(QThread):
 
     # Carriers
-    lifecycleRequested = QtCore.pyqtSignal(object)
+    lifecycleRequested = QtCore.Signal(object)
 
     def __init__(self):
         self._isRunning = True
@@ -615,8 +636,8 @@ class LifecycleThread(QThread):
 class TelemetryThread(QThread):
 
     # Carriers
-    received = QtCore.pyqtSignal(object)
-    requestHalt = QtCore.pyqtSignal(object)
+    received = QtCore.Signal(object)
+    requestHalt = QtCore.Signal(object)
 
     def __init__(self):
         self._isRunning = True
