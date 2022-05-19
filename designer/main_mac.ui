@@ -520,6 +520,12 @@ border-radius: 20px;</string>
        </property>
        <item>
         <widget class="QGroupBox" name="header_box_2">
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>90</height>
+          </size>
+         </property>
          <layout class="QHBoxLayout" name="header_box">
           <item>
            <widget class="QGroupBox" name="title_box">
@@ -1687,7 +1693,7 @@ p, li { white-space: pre-wrap; }
       </layout>
      </widget>
     </item>
-    <item row="2" column="0" rowspan="2" colspan="2">
+    <item row="2" column="0" colspan="2">
      <widget class="QWidget" name="payload_box" native="true">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
@@ -2686,7 +2692,7 @@ background-color: white;</string>
       </layout>
      </widget>
     </item>
-    <item row="3" column="2">
+    <item row="3" column="0" colspan="3">
      <widget class="QWidget" name="mission_box" native="true">
       <property name="maximumSize">
        <size>
@@ -3298,7 +3304,7 @@ QMenu::separator {
   </customwidget>
  </customwidgets>
  <resources>
-  <include location="../resources.qrc"/>
+  <include location="resources.qrc"/>
  </resources>
  <connections/>
 </ui>
