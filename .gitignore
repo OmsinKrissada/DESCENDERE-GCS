@@ -133,5 +133,5 @@ dmypy.json
 Flight*.csv
 data*.kml
 start.bat
-logs
+log*
 log backups

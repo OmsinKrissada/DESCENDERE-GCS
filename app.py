@@ -49,18 +49,18 @@ class App(QMainWindow):
                           'Flight_1022_T.csv', 'Flight_1022_T_with_corrupted.csv']
         for filename in log_file_names:
             if os.path.exists(filename):
-                if sys.platform.startswith('win'):
-                    creation_time = datetime.fromtimestamp(os.path.getctime(
-                        filename))
-                else:
-                    try:
-                        creation_time = datetime.fromtimestamp(
-                            os.stat(filename).st_birthtime)
-                    except AttributeError:
-                        creation_time = datetime.fromtimestamp(
-                            os.stat(filename).st_mtime)
+                # if sys.platform.startswith('win'):
+                modified_time = datetime.fromtimestamp(os.path.getmtime(
+                    filename))
+                # else:
+                #     try:
+                #         creation_time = datetime.fromtimestamp(
+                #             os.stat(filename).st_birthtime)
+                #     except AttributeError:
+                #         creation_time = datetime.fromtimestamp(
+                #             os.stat(filename).st_mtime)
                 os.rename(
-                    filename, f'logs/{creation_time.strftime("%Y-%m-%dT%H_%M_%S")}_{filename}')
+                    filename, f'logs/{modified_time.strftime("%Y-%m-%dT%H_%M_%S")}_{filename}')
 
         # Initilize MQTT
         self.mqtt_enabled = False
