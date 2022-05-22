@@ -7,17 +7,17 @@ class RTC:
         self.start_time = time.time()
 
     @staticmethod
-    def format_time(time):
+    def format_time(time, blink=True):
         time_list = [str(time.hour).zfill(2), str(time.minute).zfill(
             2), str(time.second).zfill(2)]
         timen = ' '.join(
-            time_list) if time.second % 2 == 0 else ':'.join(time_list)
+            time_list) if time.second % 2 == 0 and blink else ':'.join(time_list)
         return '.'.join((timen, str(time.microsecond)[0:3]))
 
     @staticmethod
-    def time_local():
+    def time_local(blink: bool):
         time = datetime.now().time()
-        return RTC.format_time(time)
+        return RTC.format_time(time, blink)
 
     @staticmethod
     def time_UTC():
