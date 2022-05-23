@@ -42,9 +42,6 @@ class App(QMainWindow):
             os.rename('data.kml', f'kml/data_{i}.kml')
         self.map_initialized = False
 
-        self.time_begin = str(RTC.date_local())+'T' + \
-            RTC.time_local(False).split('.')[0]
-        self.time_begin = self.time_begin.replace(':', '_')
         # print(self.time_begin)
 
         # # Move old logs
@@ -290,6 +287,27 @@ class App(QMainWindow):
         self.ui.lng_value.setText('-')
         self.ui.sats_value.setText('0')
 
+        self.time_begin = str(RTC.date_local())+'T' + \
+            RTC.time_local(False).split('.')[0]
+        self.time_begin = self.time_begin.replace(':', '_')
+        with open('Flight_1022_C.csv', 'w') as file:
+            file.write('TEAM_ID,MISSION_TIME,PACKET_COUNT,PACKET_TYPE,MODE,TP_RELEASED,ALTITUDE,TEMP,VOLTAGE,GPS_TIME,GPS_LATITUDE,GPS_LONGITUDE,GPS_ALTITUDE,GPS_SATS,SOFTWARE_STATE,CMD_ECHO\n')
+        with open('Flight_1022_C_with_corrupted.csv', 'w') as file:
+            file.write('TEAM_ID,MISSION_TIME,PACKET_COUNT,PACKET_TYPE,MODE,TP_RELEASED,ALTITUDE,TEMP,VOLTAGE,GPS_TIME,GPS_LATITUDE,GPS_LONGITUDE,GPS_ALTITUDE,GPS_SATS,SOFTWARE_STATE,CMD_ECHO\n')
+        with open(f'logs/{self.time_begin}_Flight_1022_C.csv', 'a') as file:
+            file.write('TEAM_ID,MISSION_TIME,PACKET_COUNT,PACKET_TYPE,MODE,TP_RELEASED,ALTITUDE,TEMP,VOLTAGE,GPS_TIME,GPS_LATITUDE,GPS_LONGITUDE,GPS_ALTITUDE,GPS_SATS,SOFTWARE_STATE,CMD_ECHO\n')
+        with open(f'logs/{self.time_begin}_Flight_1022_C_with_corrupted.csv', 'a') as file:
+            file.write('TEAM_ID,MISSION_TIME,PACKET_COUNT,PACKET_TYPE,MODE,TP_RELEASED,ALTITUDE,TEMP,VOLTAGE,GPS_TIME,GPS_LATITUDE,GPS_LONGITUDE,GPS_ALTITUDE,GPS_SATS,SOFTWARE_STATE,CMD_ECHO\n')
+
+        with open('Flight_1022_T.csv', 'w') as file:
+            file.write('TEAM_ID,MISSION_TIME,PACKET_COUNT,PACKET_TYPE,TP_ALTITUDE,TP_TEMP,TP_VOLTAGE,GYRO_R,GYRO_P,GYRO_Y,ACCEL_R,ACCEL_P,ACCEL_Y,MAG_R,MAG_P,MAG_Y,POINTING_ERROR,TP_SOFTWARE_STATE\n')
+        with open('Flight_1022_T_with_corrupted.csv', 'w') as file:
+            file.write('TEAM_ID,MISSION_TIME,PACKET_COUNT,PACKET_TYPE,TP_ALTITUDE,TP_TEMP,TP_VOLTAGE,GYRO_R,GYRO_P,GYRO_Y,ACCEL_R,ACCEL_P,ACCEL_Y,MAG_R,MAG_P,MAG_Y,POINTING_ERROR,TP_SOFTWARE_STATE\n')
+        with open(f'logs/{self.time_begin}_Flight_1022_T.csv', 'a') as file:
+            file.write('TEAM_ID,MISSION_TIME,PACKET_COUNT,PACKET_TYPE,TP_ALTITUDE,TP_TEMP,TP_VOLTAGE,GYRO_R,GYRO_P,GYRO_Y,ACCEL_R,ACCEL_P,ACCEL_Y,MAG_R,MAG_P,MAG_Y,POINTING_ERROR,TP_SOFTWARE_STATE\n')
+        with open(f'logs/{self.time_begin}_Flight_1022_T_with_corrupted.csv', 'a') as file:
+            file.write('TEAM_ID,MISSION_TIME,PACKET_COUNT,PACKET_TYPE,TP_ALTITUDE,TP_TEMP,TP_VOLTAGE,GYRO_R,GYRO_P,GYRO_Y,ACCEL_R,ACCEL_P,ACCEL_Y,MAG_R,MAG_P,MAG_Y,POINTING_ERROR,TP_SOFTWARE_STATE\n')
+
     def updateMQTT(self, enable: bool):
         if enable:
             logger.info('Connecting to MQTT broker ...')
@@ -329,7 +347,7 @@ class App(QMainWindow):
             # logger.info(f'[CANSAT] :{data}')
             with open('Flight_1022_C_with_corrupted.csv', 'a') as f:
                 f.write(data+'\n')
-            with open(f'{self.time_begin}_Flight_1022_C_with_corrupted.csv', 'a') as f:
+            with open(f'logs/{self.time_begin}_Flight_1022_C_with_corrupted.csv', 'a') as f:
                 f.write(data+'\n')
             self.latest_container_telemetry = pkg[:]
             self.updateContainer()
@@ -339,7 +357,7 @@ class App(QMainWindow):
             # logger.info(f'[PAYLOAD]: {data}')
             with open('Flight_1022_T_with_corrupted.csv', 'a') as f:
                 f.write(data+'\n')
-            with open(f'{self.time_begin}_Flight_1022_T_with_corrupted.csv', 'a') as f:
+            with open(f'logs/{self.time_begin}_Flight_1022_T_with_corrupted.csv', 'a') as f:
                 f.write(data+'\n')
             self.latest_payload_telemetry = pkg[:]
             self.updatePayload()
@@ -396,7 +414,7 @@ class App(QMainWindow):
                 str(self.container_healthy_pkg))
             with open('Flight_1022_C.csv', 'a') as file:
                 file.write(','.join(self.latest_container_telemetry)+'\n')
-            with open(f'{self.time_begin}_Flight_1022_C.csv', 'a') as file:
+            with open(f'logs/{self.time_begin}_Flight_1022_C.csv', 'a') as file:
                 file.write(','.join(self.latest_container_telemetry)+'\n')
 
         except Exception:
@@ -472,7 +490,7 @@ class App(QMainWindow):
                 str(self.payload_healthy_pkg))
             with open('Flight_1022_T.csv', 'a') as file:
                 file.write(','.join(self.latest_payload_telemetry)+'\n')
-            with open(f'{self.time_begin}_Flight_1022_T.csv', 'a') as file:
+            with open(f'logs/{self.time_begin}_Flight_1022_T.csv', 'a') as file:
                 file.write(','.join(self.latest_payload_telemetry)+'\n')
         except Exception:
             self.payload_corrupted_pkg += 1
