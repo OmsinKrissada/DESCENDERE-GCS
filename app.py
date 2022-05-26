@@ -580,10 +580,11 @@ class LifecycleThread(QThread):
 
     def __init__(self):
         self._isRunning = True
+        # self.setTerminationEnabled(True)
         super(LifecycleThread, self).__init__(None)
 
-    def __del__(self):
-        self.wait()
+    # def __del__(self):
+    #     self.wait()
 
     def run(self):
         logger.info('Lifecycle thread started')
@@ -607,8 +608,8 @@ class TelemetryThread(QThread):
         self._isRunning = True
         super(TelemetryThread, self).__init__(None)
 
-    def __del__(self):
-        self.wait()
+    # def __del__(self):
+    #     self.wait()
 
     def run(self):
         logger.info('Telemetry thread started')
@@ -622,7 +623,7 @@ class TelemetryThread(QThread):
 
     def stop(self):
         self._isRunning = False
-        self.terminate()
+        self.exit()
         logger.info('Telemetry thread stopped')
 
 
@@ -631,8 +632,8 @@ class SimThread(QThread):
         self._isRunning = True
         super(SimThread, self).__init__(None)
 
-    def __del__(self):
-        self.wait()
+    # def __del__(self):
+    #     self.wait()
 
     def run(self):
         logger.info('Sim thread started')
@@ -646,7 +647,7 @@ class SimThread(QThread):
 
     def stop(self):
         self._isRunning = False
-        self.terminate()
+        self.exit()
         logger.info('Sim thread stopped')
 
 

@@ -14,7 +14,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
@@ -133,6 +132,6 @@ dmypy.json
 Flight*.csv
 data*.kml
 start.bat
-log*
+logs/
 log backups
 kml
