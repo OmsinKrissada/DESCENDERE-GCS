@@ -1,13 +1,14 @@
 from PySide6 import QtCore
 from PySide6.QtCore import QThread, QTimer
-from port import DisconnectException
+from lib.port import DisconnectException
 from datetime import datetime
 
 from ui.mainwindow_ui import Ui_MainWindow
-from communication import TelemetryHandler, Port
-from logger import logger
-from chart import Chart
-from rtc import RTC
+from lib.communication import TelemetryHandler, Port
+from lib.logger import logger
+from lib.chart import Chart
+from lib.rtc import RTC
+from lib.gearth import Coordinate, LoadDirectory
 import settings
 
 from PySide6 import QtWidgets
@@ -29,40 +30,6 @@ class App(QMainWindow):
         self.ui.setupUi(self)
         self.show()
         # self.showMaximized()
-
-        # Initialize map
-        if not os.path.exists('kml'):
-            os.mkdir('kml')
-        if os.path.exists('data.kml'):
-            i = 0
-            path = f'kml/data_{i}.kml'
-            while(os.path.exists(path)):
-                i += 1
-                path = f'kml/data_{i}.kml'
-            os.rename('data.kml', f'kml/data_{i}.kml')
-        self.map_initialized = False
-
-        # print(self.time_begin)
-
-        # # Move old logs
-        # if not os.path.exists('logs'):
-        #     os.mkdir('logs')
-        # log_file_names = ['Flight_1022_C.csv', 'Flight_1022_C_with_corrupted.csv',
-        #                   'Flight_1022_T.csv', 'Flight_1022_T_with_corrupted.csv']
-        # for filename in log_file_names:
-        #     if os.path.exists(filename):
-        #         # if sys.platform.startswith('win'):
-        #         modified_time = datetime.fromtimestamp(os.path.getmtime(
-        #             filename))
-        #         # else:
-        #         #     try:
-        #         #         creation_time = datetime.fromtimestamp(
-        #         #             os.stat(filename).st_birthtime)
-        #         #     except AttributeError:
-        #         #         creation_time = datetime.fromtimestamp(
-        #         #             os.stat(filename).st_mtime)
-        #         os.rename(
-        #             filename, f'logs/{modified_time.strftime("%Y-%m-%dT%H_%M_%S")}_{filename}')
 
         # Initilize MQTT
         self.mqtt_enabled = False
@@ -308,6 +275,24 @@ class App(QMainWindow):
         with open(f'logs/{self.time_begin}_Flight_1022_T_with_corrupted.csv', 'a') as file:
             file.write('TEAM_ID,MISSION_TIME,PACKET_COUNT,PACKET_TYPE,TP_ALTITUDE,TP_TEMP,TP_VOLTAGE,GYRO_R,GYRO_P,GYRO_Y,ACCEL_R,ACCEL_P,ACCEL_Y,MAG_R,MAG_P,MAG_Y,POINTING_ERROR,TP_SOFTWARE_STATE\n')
 
+        self.dirloader = LoadDirectory(
+            'neilkml', 'neilcsv', 'csv', earth_save_name=self.time_begin, folder_name='kml')
+
+        self.dirloader.appendEarthCoord(
+            Coordinate(13, 100, 5), color='ff00ff00')
+
+        # Initialize map
+        # if not os.path.exists('kml'):
+        #     os.mkdir('kml')
+        # if os.path.exists('data.kml'):
+        #     i = 0
+        #     path = f'kml/data_{i}.kml'
+        #     while(os.path.exists(path)):
+        #         i += 1
+        #         path = f'kml/data_{i}.kml'
+        #     os.rename('data.kml', f'kml/data_{i}.kml')
+        # self.map_initialized = False
+
     def updateMQTT(self, enable: bool):
         if enable:
             logger.info('Connecting to MQTT broker ...')
@@ -460,7 +445,8 @@ class App(QMainWindow):
         self.c_voltage_chart .plot(self.c_pkg_data, self.c_voltage_data)
 
         # Update map
-        self.updateMap((GPS_LATITUDE, GPS_LONGITUDE))
+        self.dirloader.appendEarthCoord(Coordinate(
+            GPS_LATITUDE, GPS_LONGITUDE, ALTITUDE), 'ff00ff00')
         self.ui.lat_value.setText(GPS_LATITUDE)
         self.ui.lng_value.setText(GPS_LONGITUDE)
         self.ui.sats_value.setText(GPS_SATS)
@@ -579,59 +565,6 @@ class App(QMainWindow):
         self.sim_filename, _ = QFileDialog.getOpenFileName(
             filter='CSV Files (*.csv);;All Files (*)', caption='Open simulation file')
         self.ui.sim_file_display.setText(self.sim_filename.split('/')[-1])
-
-    def updateMap(self, coords: tuple):
-        # self.coords.append(coords)
-        # kml = simplekml.Kml()
-        # kml.newpoint(coords=self.coords)
-        # kml.save("Save.kml")
-        if coords[1] != 0 and coords[0] != 0:
-            self.coords += f'{coords[1]},{coords[0]},{self.c_gps_altitude_data[-1]}\n'
-
-        with open('data.kml', 'w') as file:
-            file.writelines('''<?xml version="1.0" encoding="UTF-8"?>
-<kml xmlns="http://www.opengis.net/kml/2.2">
-	<Document>
-		<name>DESCENDERE Container</name>
-		<Placemark>
-			<name>Flight Track</name>
-			<Style>
-				<LineStyle>
-					<color>ff00ff00</color>
-					<colorMode>normal</colorMode>
-					<width>2</width>
-				</LineStyle>
-			</Style>
-			<LineString>
-				<extrude>1</extrude>
-				<tessellate>1</tessellate>
-				<altitudeMode>absolute</altitudeMode>
-				<coordinates>\n''')
-            file.writelines(self.coords)
-            file.writelines(
-                '\n' + '''</coordinates>
-			</LineString>
-		</Placemark>
-	</Document>
-</kml>''')
-        # pass
-        # self.ui.lat_value.setText(str(coords[0]))
-        # self.ui.lng_value.setText(str(coords[1]))
-        # if self.map_initialized:
-        #     self.map
-        #     Marker(
-        #         location=coords,
-        #         popup=str(self.c_pkg_data[-1] + 1) + ' : ' +
-        #         str(self.c_altitude_data) + 'm',
-        #         icon=Icon(),
-        #     ).add_to(self.map)
-        # else:
-        #     self.map = Map(location=coords, zoom_start=16,
-        #                    min_zoom=10, prefer_canvas=True)
-        # self.map_data = io.BytesIO()
-        # self.map.save(self.map_data, close_file=False)
-        # self.ui.gps_map.setHtml(self.map_data.getvalue().decode())
-        # self.map_initialized = True
 
     def toggleFullScreen(self):
         if self.isFullScreen():

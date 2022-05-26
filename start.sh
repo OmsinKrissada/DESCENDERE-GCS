@@ -1,0 +1,1 @@
+/Users/omsin/Desktop/start_ground_station.sh
