@@ -154,10 +154,16 @@ class App(QMainWindow):
             lambda: self.telemetry.sendCommand('FORCE', 'RELEASE'))
         self.ui.actionBreak.triggered.connect(
             lambda: self.telemetry.sendCommand('FORCE', 'BREAK'))
-        self.ui.actionSet_Mode_1_0_5s.triggered.connect(
+        self.ui.actionMode0.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'MODE0'))
+        self.ui.actionMode1.triggered.connect(
             lambda: self.telemetry.sendCommand('FORCE', 'MODE1'))
-        self.ui.actionSet_Mode_2_0_55s.triggered.connect(
+        self.ui.actionMode_2.triggered.connect(
             lambda: self.telemetry.sendCommand('FORCE', 'MODE2'))
+        self.ui.actionMode_3.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'MODE3'))
+        self.ui.actionMode_4.triggered.connect(
+            lambda: self.telemetry.sendCommand('FORCE', 'MODE4'))
         self.ui.action0_PRELAUNCH.triggered.connect(
             lambda: self.telemetry.sendCommand('FORCE', 'STATE0'))
         self.ui.action1_LAUNCH.triggered.connect(
@@ -446,7 +452,7 @@ class App(QMainWindow):
 
         # Update map
         self.dirloader.appendEarthCoord(Coordinate(
-            GPS_LATITUDE, GPS_LONGITUDE, ALTITUDE), 'ff00ff00')
+            GPS_LATITUDE, GPS_LONGITUDE, ALTITUDE), color='ff00ff00')
         self.ui.lat_value.setText(GPS_LATITUDE)
         self.ui.lng_value.setText(GPS_LONGITUDE)
         self.ui.sats_value.setText(GPS_SATS)
