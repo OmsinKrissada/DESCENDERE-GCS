@@ -130,6 +130,8 @@ class App(QMainWindow):
         '''
         Connect UI components with their respective functions.
         '''
+        self.ui.actionCSVLocation.triggered.connect(
+            lambda: os.startfile(('logs')))
         self.ui.actionParachute.triggered.connect(
             lambda: self.telemetry.sendCommand('FORCE', 'PARADEPLOY'))
         self.ui.actionPoll.triggered.connect(
@@ -263,6 +265,8 @@ class App(QMainWindow):
         self.time_begin = str(RTC.date_local())+'T' + \
             RTC.time_local(False).split('.')[0]
         self.time_begin = self.time_begin.replace(':', '_')
+        if not os.path.exists('logs'):
+            os.mkdir('logs')
         with open('Flight_1022_C.csv', 'w') as file:
             file.write('TEAM_ID,MISSION_TIME,PACKET_COUNT,PACKET_TYPE,MODE,TP_RELEASED,ALTITUDE,TEMP,VOLTAGE,GPS_TIME,GPS_LATITUDE,GPS_LONGITUDE,GPS_ALTITUDE,GPS_SATS,SOFTWARE_STATE,CMD_ECHO\n')
         with open('Flight_1022_C_with_corrupted.csv', 'w') as file:

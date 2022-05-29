@@ -3016,7 +3016,7 @@ QMenu::separator {
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionSave"/>
+    <addaction name="actionCSVLocation"/>
     <addaction name="actionOpen_simulation_file"/>
    </widget>
    <widget class="QMenu" name="menuTest">
@@ -3083,7 +3083,7 @@ QMenu::separator {
    <addaction name="menuSet_State"/>
    <addaction name="menuWindow"/>
   </widget>
-  <action name="actionSave">
+  <action name="actionCSVLocation">
    <property name="text">
     <string>Open CSV file location</string>
    </property>

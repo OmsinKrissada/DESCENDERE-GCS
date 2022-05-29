@@ -1,0 +1,14 @@
+from re import A, X
+from time import sleep
+def delayBefore(f):
+    print(5)
+    sleep(2)
+    f()
+
+def hello(arg):
+    print(arg)
+    return 1
+
+a = lambda x: print(x + 3)
+a(56)
+#(hello)

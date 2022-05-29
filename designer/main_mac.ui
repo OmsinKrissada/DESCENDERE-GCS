@@ -2928,7 +2928,7 @@ border-radius: 5px;</string>
      <x>0</x>
      <y>0</y>
      <width>1930</width>
-     <height>19</height>
+     <height>18</height>
     </rect>
    </property>
    <property name="font">
@@ -3032,7 +3032,7 @@ QMenu::separator {
    </widget>
    <widget class="QMenu" name="menuBreak_System">
     <property name="title">
-     <string>Break System</string>
+     <string>Brake System</string>
     </property>
     <addaction name="actionRelease_Sequence"/>
     <addaction name="actionRelease"/>
@@ -3081,7 +3081,7 @@ QMenu::separator {
    <property name="shortcut">
     <string>F11</string>
    </property>
-   <property name="shortcutVisibleInContextMenu" stdset="0">
+   <property name="shortcutVisibleInContextMenu">
     <bool>false</bool>
    </property>
   </action>
@@ -3135,7 +3135,7 @@ QMenu::separator {
   </action>
   <action name="actionBreak">
    <property name="text">
-    <string>Break</string>
+    <string>Brake</string>
    </property>
   </action>
   <action name="actionCalibrate_Gimbal_IMU">
