@@ -2928,7 +2928,7 @@ border-radius: 5px;</string>
      <x>0</x>
      <y>0</y>
      <width>1930</width>
-     <height>18</height>
+     <height>19</height>
     </rect>
    </property>
    <property name="font">
@@ -2985,7 +2985,7 @@ QMenu::separator {
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionSave"/>
+    <addaction name="actionCSVLocation"/>
     <addaction name="actionOpen_simulation_file"/>
    </widget>
    <widget class="QMenu" name="menuTest">
@@ -3039,8 +3039,11 @@ QMenu::separator {
     <addaction name="actionBreak"/>
     <addaction name="actionHalt_Sequence"/>
     <addaction name="separator"/>
-    <addaction name="actionSet_Mode_1_0_5s"/>
-    <addaction name="actionSet_Mode_2_0_55s"/>
+    <addaction name="actionMode0"/>
+    <addaction name="actionMode1"/>
+    <addaction name="actionMode_2"/>
+    <addaction name="actionMode_3"/>
+    <addaction name="actionMode_4"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuMQTT"/>
@@ -3049,7 +3052,7 @@ QMenu::separator {
    <addaction name="menuSet_State"/>
    <addaction name="menuWindow"/>
   </widget>
-  <action name="actionSave">
+  <action name="actionCSVLocation">
    <property name="text">
     <string>Open CSV file location</string>
    </property>
@@ -3081,7 +3084,7 @@ QMenu::separator {
    <property name="shortcut">
     <string>F11</string>
    </property>
-   <property name="shortcutVisibleInContextMenu">
+   <property name="shortcutVisibleInContextMenu" stdset="0">
     <bool>false</bool>
    </property>
   </action>
@@ -3188,14 +3191,14 @@ QMenu::separator {
     <string>Unforce Polling Payload</string>
    </property>
   </action>
-  <action name="actionSet_Mode_1_0_5s">
+  <action name="actionMode0">
    <property name="text">
-    <string>Set Mode 1 (0.5s)</string>
+    <string>Mode 0</string>
    </property>
   </action>
-  <action name="actionSet_Mode_2_0_55s">
+  <action name="actionMode1">
    <property name="text">
-    <string>Set Mode 2 (0.55s)</string>
+    <string>Mode 1</string>
    </property>
   </action>
   <action name="actionPayload_On">
@@ -3216,6 +3219,21 @@ QMenu::separator {
   <action name="actionToggle_Custom_Packet">
    <property name="text">
     <string>Toggle Custom Packet</string>
+   </property>
+  </action>
+  <action name="actionMode_2">
+   <property name="text">
+    <string>Mode 2</string>
+   </property>
+  </action>
+  <action name="actionMode_3">
+   <property name="text">
+    <string>Mode 3</string>
+   </property>
+  </action>
+  <action name="actionMode_4">
+   <property name="text">
+    <string>Mode 4</string>
    </property>
   </action>
  </widget>
