@@ -79,6 +79,8 @@ class App(QMainWindow):
         self.telemetry_thread.received.connect(self.handleTelemetry)
         self.telemetry_thread.requestHalt.connect(self.stop_lifecycle)
 
+        self.sim_filename = ''
+
         self.updateCmdPreview()
 
         # Connect UI components
@@ -126,12 +128,20 @@ class App(QMainWindow):
         self.ui.total_corrupted_pkg_value.setText(
             str(self.container_corrupted_pkg+self.payload_corrupted_pkg))
 
+    def open_sim_file(self):
+        if self.sim_filename:
+            os.startfile(self.sim_filename)
+        else:
+            self.ui.telemetry_log.append('No simulation file selected')
+
     def connect(self):
         '''
         Connect UI components with their respective functions.
         '''
         self.ui.actionCSVLocation.triggered.connect(
             lambda: os.startfile(('logs')))
+        self.ui.actionOpen_simulation_file.triggered.connect(
+            self.open_sim_file)
         self.ui.actionParachute.triggered.connect(
             lambda: self.telemetry.sendCommand('FORCE', 'PARADEPLOY'))
         self.ui.actionPoll.triggered.connect(
@@ -359,7 +369,6 @@ class App(QMainWindow):
 
     def updateCmdPreview(self):
         command = self.ui.cmd_select_box.currentText()
-        self.ui.telemetry_log.append(command)
         if hasattr(self, 'settime_preview_timer'):
             self.settime_preview_timer.stop()
         if command == 'Power ON':
@@ -603,6 +612,7 @@ class LifecycleThread(QThread):
             time.sleep(0.001)  # Not to consume too much processing power
 
     def stop(self):
+        logger.info('Lifecycle thread stopping')
         self._isRunning = False
         self.terminate()
         logger.info('Lifecycle thread stopped')
@@ -632,8 +642,9 @@ class TelemetryThread(QThread):
             self.received.emit(incoming_data)
 
     def stop(self):
+        logger.info('Telemetry thread stopping')
         self._isRunning = False
-        self.exit()
+        self.terminate()
         logger.info('Telemetry thread stopped')
 
 
@@ -656,8 +667,9 @@ class SimThread(QThread):
                     time.sleep(1)
 
     def stop(self):
+        logger.info('Sim thread stopping')
         self._isRunning = False
-        self.exit()
+        self.terminate()
         logger.info('Sim thread stopped')
 
 
@@ -671,6 +683,7 @@ if __name__ == '__main__':
     window = App()
     window.showMaximized()
     # window.showFullScreen()
+    # app.setQuitOnLastWindowClosed(False)
 
     # window.updateMap((13.67876, 100.52819))
 
@@ -679,4 +692,10 @@ if __name__ == '__main__':
         logger.info('Starting window ...')
         sys.exit(app.exec())
     except SystemExit:
+        if hasattr(window, 'sim_thread') and window.sim_thread.isRunning():
+            window.sim_thread.stop()
+        if hasattr(window, 'lifecycle_thread') and window.lifecycle_thread.isRunning():
+            window.lifecycle_thread.stop()
+        if hasattr(window, 'telemetry_thread') and window.telemetry_thread.isRunning():
+            window.telemetry_thread.stop()
         logger.info('Closing window ...')
