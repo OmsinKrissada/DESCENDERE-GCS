@@ -35,7 +35,8 @@ class Port:
             try:
                 s = serial.Serial(port)
                 s.close()
-
+                if port == '/dev/tty.Bluetooth-Incoming-Port':
+                    continue
                 result.append(port)
             except serial.SerialException:
                 pass    # legit 'except pass' here
