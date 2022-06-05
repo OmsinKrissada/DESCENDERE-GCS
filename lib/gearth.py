@@ -233,9 +233,9 @@ class LoadDirectory:
                 f_save.write(self.earth_coord_2)
         else:
             self.pos_earth = self.insertLine(
-                self.path_earth_coord, -5, __coord, self.pos_earth)
+                self.path_earth_coord, -4, __coord, self.pos_earth)
             self.pos_save = self.insertLine(
-                self.path_save_coord, -5, __coord, self.pos_save)
+                self.path_save_coord, -4, __coord, self.pos_save)
         logger.debug('Earth Coord File appended successfully!')
         if echo:
             return self.earth_coord_0 + color + self.earth_coord_1 + '\n'.join(__coord) + self.earth_coord_2

@@ -298,9 +298,6 @@ class App(QMainWindow):
         self.dirloader = LoadDirectory(
             'neilkml', 'neilcsv', 'csv', earth_save_name=self.time_begin, folder_name='kml')
 
-        self.dirloader.appendEarthCoord(
-            Coordinate(13, 100, 5), color='ff00ff00')
-
         # Initialize map
         # if not os.path.exists('kml'):
         #     os.mkdir('kml')
@@ -464,12 +461,11 @@ class App(QMainWindow):
         self.c_voltage_chart .plot(self.c_pkg_data, self.c_voltage_data)
 
         # Update map
-        self.dirloader.appendEarthCoord(Coordinate(
-            GPS_LATITUDE, GPS_LONGITUDE, ALTITUDE), color='ff00ff00')
         self.ui.lat_value.setText(GPS_LATITUDE)
         self.ui.lng_value.setText(GPS_LONGITUDE)
         self.ui.sats_value.setText(GPS_SATS)
-
+        self.dirloader.appendEarthCoord(Coordinate(
+            GPS_LATITUDE, GPS_LONGITUDE, ALTITUDE), color='ff00ff00')
         # Update battery
         bat_percent = self.batteryPercentage(float(VOLTAGE))
         self.ui.container_battery_percent.setText(
@@ -688,7 +684,6 @@ if __name__ == '__main__':
     # window.updateMap((13.67876, 100.52819))
 
     try:
-
         logger.info('Starting window ...')
         sys.exit(app.exec())
     except SystemExit:
