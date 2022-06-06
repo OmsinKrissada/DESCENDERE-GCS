@@ -342,8 +342,8 @@ class App(QMainWindow):
             logger.error('Received data is None')
             return
         pkg = data.split(',')
-        pkg[1] = datetime.utcnow().strftime('%H:%M:%S')
-        pkg[9] = datetime.utcnow().strftime('%H:%M:%S')
+        # pkg[1] = datetime.utcnow().strftime('%H:%M:%S')
+        # pkg[9] = datetime.utcnow().strftime('%H:%M:%S')
         if self.mqtt_enabled:
             self.mqtt_client.publish('teams/1022', data)
 
