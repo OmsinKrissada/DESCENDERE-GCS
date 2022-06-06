@@ -2371,6 +2371,31 @@ background-color: white;</string>
           <string notr="true">border-radius: 3px;</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_5">
+          <item row="1" column="5">
+           <widget class="PlotWidget" name="p_altitude_chart" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>343</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>343</width>
+              <height>191</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: black;</string>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="3">
            <widget class="PlotWidget" name="p_voltage_chart" native="true">
             <property name="sizePolicy">
@@ -2398,31 +2423,6 @@ background-color: white;</string>
           </item>
           <item row="1" column="0">
            <widget class="PlotWidget" name="p_mag_chart" native="true">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="minimumSize">
-             <size>
-              <width>343</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>343</width>
-              <height>191</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: black;</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="PlotWidget" name="p_ptr_err_chart" native="true">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
               <horstretch>0</horstretch>
@@ -2576,6 +2576,31 @@ background-color: white;</string>
             </layout>
            </widget>
           </item>
+          <item row="1" column="1">
+           <widget class="PlotWidget" name="p_ptr_err_chart" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="MinimumExpanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>343</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>343</width>
+              <height>191</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">background-color: black;</string>
+            </property>
+           </widget>
+          </item>
           <item row="0" column="0">
            <widget class="QWidget" name="widget_15" native="true">
             <layout class="QHBoxLayout" name="horizontalLayout_14">
@@ -2609,6 +2634,71 @@ background-color: white;</string>
              </item>
              <item>
               <widget class="QLabel" name="p_mag_value">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Consolas</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: cyan;</string>
+               </property>
+               <property name="text">
+                <string>N/A</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="0" column="5">
+           <widget class="QWidget" name="widget_18" native="true">
+            <layout class="QHBoxLayout" name="horizontalLayout_29">
+             <item>
+              <widget class="QLabel" name="p_altitude_label">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Minimum">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="minimumSize">
+                <size>
+                 <width>0</width>
+                 <height>0</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <family>Inter</family>
+                 <pointsize>12</pointsize>
+                </font>
+               </property>
+               <property name="text">
+                <string>Altitude:</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="p_altitude_value">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                  <horstretch>0</horstretch>

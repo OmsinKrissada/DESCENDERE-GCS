@@ -61,6 +61,8 @@ class App(QMainWindow):
             self.ui.p_ptr_err_chart, self.ui.p_ptr_err_value, 'degrees')
         self.p_voltage_chart = Chart(
             self.ui.p_voltage_chart, self.ui.p_voltage_value, 'V')
+        self.p_altitude_chart = Chart(
+            self.ui.p_altitude_chart, self.ui.p_altitude_value, 'm')
 
         self.reset()
 
@@ -340,6 +342,8 @@ class App(QMainWindow):
             logger.error('Received data is None')
             return
         pkg = data.split(',')
+        pkg[1] = datetime.utcnow().strftime('%H:%M:%S')
+        pkg[9] = datetime.utcnow().strftime('%H:%M:%S')
         if self.mqtt_enabled:
             self.mqtt_client.publish('teams/1022', data)
 
@@ -529,6 +533,7 @@ class App(QMainWindow):
             self.p_pkg_data, (self.p_mag_r_data, self.p_mag_p_data, self.p_mag_y_data))
         self.p_ptr_err_chart.plot(self.p_pkg_data, self.p_ptr_err_data)
         self.p_voltage_chart.plot(self.p_pkg_data, self.p_voltage_data)
+        self.p_altitude_chart.plot(self.p_pkg_data, self.p_altitude_data)
 
         # Update battery
         bat_percent = self.batteryPercentage(float(TP_VOLTAGE))
