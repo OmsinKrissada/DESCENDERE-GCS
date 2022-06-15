@@ -341,6 +341,8 @@ class App(QMainWindow):
         if data is None:
             logger.error('Received data is None')
             return
+        with open('rawfilterwithouttp.csv', 'a') as f:
+            f.write(data+'\n')
         pkg = data.split(',')
         # pkg[1] = datetime.utcnow().strftime('%H:%M:%S')
         # pkg[9] = datetime.utcnow().strftime('%H:%M:%S')

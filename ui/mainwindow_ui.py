@@ -1254,6 +1254,16 @@ class Ui_MainWindow(object):
         self.chart_box_4.setStyleSheet(u"border-radius: 3px;")
         self.gridLayout_5 = QGridLayout(self.chart_box_4)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.p_altitude_chart = PlotWidget(self.chart_box_4)
+        self.p_altitude_chart.setObjectName(u"p_altitude_chart")
+        sizePolicy4.setHeightForWidth(self.p_altitude_chart.sizePolicy().hasHeightForWidth())
+        self.p_altitude_chart.setSizePolicy(sizePolicy4)
+        self.p_altitude_chart.setMinimumSize(QSize(343, 0))
+        self.p_altitude_chart.setMaximumSize(QSize(343, 191))
+        self.p_altitude_chart.setStyleSheet(u"background-color: black;")
+
+        self.gridLayout_5.addWidget(self.p_altitude_chart, 1, 5, 1, 1)
+
         self.p_voltage_chart = PlotWidget(self.chart_box_4)
         self.p_voltage_chart.setObjectName(u"p_voltage_chart")
         sizePolicy4.setHeightForWidth(self.p_voltage_chart.sizePolicy().hasHeightForWidth())
@@ -1273,16 +1283,6 @@ class Ui_MainWindow(object):
         self.p_mag_chart.setStyleSheet(u"background-color: black;")
 
         self.gridLayout_5.addWidget(self.p_mag_chart, 1, 0, 1, 1)
-
-        self.p_ptr_err_chart = PlotWidget(self.chart_box_4)
-        self.p_ptr_err_chart.setObjectName(u"p_ptr_err_chart")
-        sizePolicy4.setHeightForWidth(self.p_ptr_err_chart.sizePolicy().hasHeightForWidth())
-        self.p_ptr_err_chart.setSizePolicy(sizePolicy4)
-        self.p_ptr_err_chart.setMinimumSize(QSize(343, 0))
-        self.p_ptr_err_chart.setMaximumSize(QSize(343, 191))
-        self.p_ptr_err_chart.setStyleSheet(u"background-color: black;")
-
-        self.gridLayout_5.addWidget(self.p_ptr_err_chart, 1, 1, 1, 1)
 
         self.widget_16 = QWidget(self.chart_box_4)
         self.widget_16.setObjectName(u"widget_16")
@@ -1340,6 +1340,16 @@ class Ui_MainWindow(object):
 
         self.gridLayout_5.addWidget(self.widget_17, 0, 3, 1, 1)
 
+        self.p_ptr_err_chart = PlotWidget(self.chart_box_4)
+        self.p_ptr_err_chart.setObjectName(u"p_ptr_err_chart")
+        sizePolicy4.setHeightForWidth(self.p_ptr_err_chart.sizePolicy().hasHeightForWidth())
+        self.p_ptr_err_chart.setSizePolicy(sizePolicy4)
+        self.p_ptr_err_chart.setMinimumSize(QSize(343, 0))
+        self.p_ptr_err_chart.setMaximumSize(QSize(343, 191))
+        self.p_ptr_err_chart.setStyleSheet(u"background-color: black;")
+
+        self.gridLayout_5.addWidget(self.p_ptr_err_chart, 1, 1, 1, 1)
+
         self.widget_15 = QWidget(self.chart_box_4)
         self.widget_15.setObjectName(u"widget_15")
         self.horizontalLayout_14 = QHBoxLayout(self.widget_15)
@@ -1367,6 +1377,34 @@ class Ui_MainWindow(object):
 
 
         self.gridLayout_5.addWidget(self.widget_15, 0, 0, 1, 1)
+
+        self.widget_18 = QWidget(self.chart_box_4)
+        self.widget_18.setObjectName(u"widget_18")
+        self.horizontalLayout_29 = QHBoxLayout(self.widget_18)
+        self.horizontalLayout_29.setObjectName(u"horizontalLayout_29")
+        self.p_altitude_label = QLabel(self.widget_18)
+        self.p_altitude_label.setObjectName(u"p_altitude_label")
+        sizePolicy5.setHeightForWidth(self.p_altitude_label.sizePolicy().hasHeightForWidth())
+        self.p_altitude_label.setSizePolicy(sizePolicy5)
+        self.p_altitude_label.setMinimumSize(QSize(0, 0))
+        self.p_altitude_label.setFont(font5)
+        self.p_altitude_label.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_29.addWidget(self.p_altitude_label)
+
+        self.p_altitude_value = QLabel(self.widget_18)
+        self.p_altitude_value.setObjectName(u"p_altitude_value")
+        sizePolicy6.setHeightForWidth(self.p_altitude_value.sizePolicy().hasHeightForWidth())
+        self.p_altitude_value.setSizePolicy(sizePolicy6)
+        self.p_altitude_value.setMinimumSize(QSize(0, 0))
+        self.p_altitude_value.setFont(font6)
+        self.p_altitude_value.setStyleSheet(u"color: cyan;")
+        self.p_altitude_value.setAlignment(Qt.AlignCenter)
+
+        self.horizontalLayout_29.addWidget(self.p_altitude_value)
+
+
+        self.gridLayout_5.addWidget(self.widget_18, 0, 5, 1, 1)
 
 
         self.verticalLayout_5.addWidget(self.chart_box_4)
@@ -1754,6 +1792,8 @@ class Ui_MainWindow(object):
         self.p_voltage_value.setText(QCoreApplication.translate("MainWindow", u"N/A", None))
         self.p_mag_label.setText(QCoreApplication.translate("MainWindow", u"Magnetometor:", None))
         self.p_mag_value.setText(QCoreApplication.translate("MainWindow", u"N/A", None))
+        self.p_altitude_label.setText(QCoreApplication.translate("MainWindow", u"Altitude:", None))
+        self.p_altitude_value.setText(QCoreApplication.translate("MainWindow", u"N/A", None))
         self.elapsed_time.setText(QCoreApplication.translate("MainWindow", u"T + HH:MM:SS.ms", None))
         self.start_button.setText(QCoreApplication.translate("MainWindow", u"START", None))
         self.label_3.setText(QCoreApplication.translate("MainWindow", u"PRELAUNCH", None))

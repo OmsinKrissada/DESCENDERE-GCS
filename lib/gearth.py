@@ -108,7 +108,7 @@ class LoadDirectory:
                              '</Style>\n' + \
                              '<LineString>\n' + \
                              '<extrude>1</extrude>\n' + \
-                             '<gx:altitudeMode>absolute</gx:altitudeMode>\n' + \
+                             '<gx:altitudeMode>relativeToGround</gx:altitudeMode>\n' + \
                              '<coordinates>\n'
         self.earth_coord_2 = '\n</coordinates>\n' + \
                              '</LineString>\n' + \
